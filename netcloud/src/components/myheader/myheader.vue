@@ -1,7 +1,7 @@
 <template>
-	<div>
-		asdasdasdasdsadads
-	</div>
+	<header>
+		sdadasdadsadsad
+	</header>
 </template>
 
 <script>

@@ -5,7 +5,7 @@
 	</div>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
 import myHeader from './components/myheader/myheader.vue'
 	export default {
 		name: 'app',
