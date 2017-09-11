@@ -1,16 +1,16 @@
 <template>
 	<div id="app">
-		{{msg}}
+		<my-header></my-header>
+		<router-view></router-view>	
 	</div>
 </template>
 
 <script>
+import myHeader from './components/myheader/myheader.vue'
 	export default {
-		name:'app',
-		data() {
-			return {
-				msg:'xinjian'
-			}
+		name: 'app',
+		components:{
+			myHeader
 		}
 	}
 
