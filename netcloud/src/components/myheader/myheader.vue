@@ -3,10 +3,16 @@
 		<div class="hl">
 			<i class="icon iconfont">&#xe699;</i>
 		</div>
-		<div class="hc t_c">
-			<i class="icon iconfont checked">&#xe628;</i>
-			<i class="icon iconfont">&#xe628;</i>
-			<i class="icon iconfont">&#xe628;</i>
+		<div class="hc t_c" ref="wrap">
+			<router-link tag="div" class="router_link checked" to="/volume" >
+				<i class="icon iconfont">&#xe680;</i>
+			</router-link>
+			<router-link tag="div" class="router_link" to="/netmusic">
+				<i class="icon iconfont netmusic" to="/netmusic">&#xe762;</i>
+			</router-link>
+			<router-link tag="div" class="router_link" to="/circle">
+				<i class="icon iconfont circle" to="/circle">&#xe645;</i>
+			</router-link>
 		</div>
 		<div class="hr t_r">
 			<i class="icon iconfont">&#xe62f;</i>
@@ -16,11 +22,19 @@
 
 <script>
 	export default {
-
+		data() {
+			return {
+				selct:0
+			}
+		},
+		mounted() {
+			
+		}
 	}
 </script>
 
 <style lang="stylus">
+	@import '../../common/stylus/public.styl'
 	header 
 		position:fixed
 		left:0
@@ -31,18 +45,20 @@
 		display:flex
 		box-sizing:border-box
 		padding:0 10px
-		background-color:rgb(34,34,37)
+		background-color:$bg_th
 		i 
-			font-size:20px!important
+			font-size:$fonts_22!important
+		i.netmusic,i.circle 
+			font-size:30px!important
 		.hl,.hr
 			flex:1
-			color:#fff
+			color:$color_th
 		.hc 
 			flex:2
 			display:flex
-			i
+			.router_link
 				flex:1
 				color:#666
-			i.checked
-				color:#fff
+			.router_link.checked
+				color:$color_th
 </style>
