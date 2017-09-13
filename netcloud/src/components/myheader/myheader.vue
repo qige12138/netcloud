@@ -4,7 +4,7 @@
 			<i class="icon iconfont">&#xe699;</i>
 		</div>
 		<div class="hc t_c" ref="wrap">
-			<router-link tag="div" class="router_link checked" to="/volume" >
+			<router-link tag="div" class="router_link" to="/volume" >
 				<i class="icon iconfont">&#xe680;</i>
 			</router-link>
 			<router-link tag="div" class="router_link" to="/netmusic">
@@ -15,21 +15,13 @@
 			</router-link>
 		</div>
 		<div class="hr t_r">
-			<i class="icon iconfont">&#xe62f;</i>
+			<i class="icon iconfont">&#xe621;</i>
 		</div>
 	</header>
 </template>
 
 <script>
 	export default {
-		data() {
-			return {
-				selct:0
-			}
-		},
-		mounted() {
-			
-		}
 	}
 </script>
 
@@ -52,13 +44,13 @@
 			font-size:30px!important
 		.hl,.hr
 			flex:1
-			color:$color_th
+			color:$color_ff
 		.hc 
 			flex:2
 			display:flex
 			.router_link
 				flex:1
 				color:#666
-			.router_link.checked
-				color:$color_th
+				&.router-link-active
+					color: $color_ff
 </style>

@@ -1,27 +1,5 @@
 <template>
-	<div class="volume">
-		<div class="volumeConent">
-			<router-link tag="div" to="" class="volumeTab">
-				<i class="icon iconfont tabI t_c">&#xe680;</i><span
-				class="tabName bd_bottom">本地音乐<span class="num">(0)</span></span>
-			</router-link>	
-			<router-link tag="div" to="" class="volumeTab">
-				<i class="icon iconfont tabI t_c">&#xe629;</i><span
-				class="tabName bd_bottom">最近播放<span class="num">(0)</span></span>
-			</router-link>
-			<router-link tag="div" to="" class="volumeTab">
-				<i class="icon iconfont tabI t_c">&#xe62d;</i><span
-				class="tabName bd_bottom">下载管理<span class="num">(0)</span></span>
-			</router-link>
-			<router-link tag="div" to="" class="volumeTab">
-				<i class="icon iconfont tabI t_c" >&#xe65e;</i><span
-				class="tabName bd_bottom">我的电台<span class="num">(0)</span></span>
-			</router-link>
-			<router-link tag="div" to="" class="volumeTab">
-				<i class="icon iconfont tabI t_c">&#xe620;</i><span
-				class="tabName bd_bottom">我的收藏<span class="num">(0)</span></span>
-			</router-link>
-		</div>
+	<div class="collectsing">
 		<div class="creat">
 			<i class="icon iconfont down  t_c" :class="{'rota':!down}"  @click="view()">&#xe64b;</i><span
 			  @click="view()">创建的歌单</span><i
@@ -33,7 +11,7 @@
 					<img src="../../common/img/timg.jpg">
 				</router-link><router-link
 				 tag="div" to="" class="singName bd_bottom">
-					<p>我喜欢的音乐</p>
+					<p>收藏的音乐</p>
 					<p>99首</p>
 				</router-link><i
 				 class="icon iconfont t_c bd_bottom">&#xe60e;</i>
@@ -43,21 +21,17 @@
 					<img src="../../common/img/timp1.jpg">
 				</router-link><router-link
 				 tag="div" to="" class="singName bd_bottom">
-					<p>哼哼</p>
+					<p>收藏的音乐</p>
 					<p>10首</p>
 				</router-link><i
 				 class="icon iconfont t_c bd_bottom">&#xe60e;</i>
 			</div>
 		</div>
-		<collect-sing></collect-sing>
 	</div>
 </template>
+
 <script>
-	import collectSing from './collectsing.vue'
 	export default {
-		components:{
-			collectSing
-		},
 		data() {
 			return {
 				down:true
@@ -70,32 +44,12 @@
 			}
 
 		}
-
 	}
 </script>
 
 <style lang="stylus">
 	@import '../../common/stylus/public.styl'
-	.volume 
-		padding-top:48px
-		font-size:$fonts_14
-		color:$color_th
-		.volumeTab 
-			height:48px
-			line-height:48px
-			.tabI 
-				bs()
-				pl(5px)
-				dis_inb()
-				width:50px
-				font-size:$fonts_22
-			.tabName 
-				dis_inb()
-				width:calc(100% - 50px)
-				.num 
-					color:#999
-					font-size:$fonts_12
-					pl(3px)
+	.collectsing
 		.creat 
 			height:28px
 			line-height:28px
@@ -116,8 +70,8 @@
 				pr(5px)
 		.creatSing 
 			bs()
-			width:100%
 			padding:4px 0 4px 4px
+			height:58px
 			.singImg 
 				dis_inb()
 				pr(4px)
@@ -144,9 +98,4 @@
 				line-height:58px
 				vertical-align: middle
 				color:#999
-		
-					
-				
-		
-			
 </style>

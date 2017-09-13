@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Volume from '@/components/volume/volume'
 import Netmusic from '@/components/netmusic/netmusic'
 import Circle from '@/components/circle/circle'
+import Collectsing from '@/components/volume/collectsing'
 
 Vue.use(Router)
 
@@ -22,7 +23,11 @@ export default new Router({
       component: Netmusic
     },
     {
-      path: '/circle',
+      path: '/volume',
+      component: Collectsing
+    },
+    {
+      path: '/netmusic',
       component: Circle
     }
 
