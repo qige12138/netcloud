@@ -64,7 +64,7 @@
 			}
 		},
 		methods:{
-			view:function(e) {
+			view(e) {
 				let down = this['down'];
 				this['down'] = down ? false : true;
 			}

@@ -27,7 +27,7 @@ export default new Router({
       component: Collectsing
     },
     {
-      path: '/netmusic',
+      path: '/circle',
       component: Circle
     }
 

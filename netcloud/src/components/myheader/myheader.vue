@@ -51,6 +51,7 @@
 			.router_link
 				flex:1
 				color:#666
+				cursor:pointer
 				&.router-link-active
 					color: $color_ff
 </style>
