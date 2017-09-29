@@ -1,11 +1,16 @@
 <template>
-	<div class="netmusic">
-		网络音乐
+	<div class="netmusic" id="netmusic">
+		<net-header></net-header>
+		<router-view></router-view>
 	</div>
 </template>
 <script>
+	import netHeader from './netheader'
 	export default {
-
+		name: 'netmusic',
+		components :{
+			netHeader
+		}
 	}
 </script>
 

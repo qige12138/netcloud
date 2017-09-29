@@ -3,6 +3,7 @@
 import 'babel-polyfill'
 import Vue from 'vue'
 import App from './App'
+// import Netmusic from './components/netmusic/netmusic'
 import router from './router'
 import fastclick from 'fastclick'
 import './common/stylus/index.styl'
@@ -15,4 +16,5 @@ new Vue({
   router,
   template: '<App/>',
   components: { App }
-})
+});
+

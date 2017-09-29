@@ -3,7 +3,7 @@
 		<div class="hl">
 			<i class="icon iconfont">&#xe699;</i>
 		</div>
-		<div class="hc t_c" ref="wrap">
+		<div class="hc t_c">
 			<router-link tag="div" class="router_link" to="/volume" >
 				<i class="icon iconfont">&#xe680;</i>
 			</router-link>
@@ -25,7 +25,7 @@
 	}
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 	@import '../../common/stylus/public.styl'
 	header 
 		position:fixed

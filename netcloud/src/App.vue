@@ -6,12 +6,13 @@
 </template>
 
 <script>
-import myHeader from './components/myheader/myheader.vue'
+import myHeader from './components/myheader/myheader'
+
 export default {
-  name: 'app',
-  components: {
-      myHeader
-    }
+	name: 'app',
+	components: {
+	  myHeader
+	}
 }
 </script>
 
