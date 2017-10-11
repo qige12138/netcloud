@@ -24,7 +24,25 @@ export default new Router({
     },
     {
       path: '/netmusic',
-      component: Netmusic
+      component: Netmusic,
+      children:[
+        {
+          path: '/',
+          redirect: '/music'
+        },
+        {
+          path:'/music',
+          component:Music
+        },
+        {
+          path:'/video',
+          component:Video
+        },
+        {
+          path:'/station',
+          component:Station
+        }
+      ]
     },
     {
       path: '/collectsing',
@@ -37,19 +55,8 @@ export default new Router({
     {
       path:'/netheader',
       component:Netheader
-    },
-    {
-      path:'/music',
-      component:Music
-    },
-    {
-      path:'/video',
-      component:Video
-    },
-    {
-      path:'/station',
-      component:Station
     }
+    
 
   ]
 })

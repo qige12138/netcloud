@@ -1,13 +1,13 @@
 <template>
 	<div class="netheader">
 		<router-link tag="div" to="/music" class="router_link t_c">
-			音乐
+			<span>音乐</span>
 		</router-link>
 		<router-link tag="div" to="/video" class="router_link t_c">
-			视频
+			<span>视频</span>
 		</router-link>
 		<router-link tag="div" to="/station" class="router_link t_c">
-			电台
+			<span>电台</span>
 		</router-link>
 	</div>
 </template>
@@ -24,14 +24,21 @@
  		height:36px
  		line-height:36px
  		background:#fff
+ 		position:fixed
+ 		top:48px
+ 		left:0
+ 		width:100%
+ 		z-index:10
  		.router_link
  			flex:1
  			bs()
  			pad_(0,15px)
  			color:$color_66
  			cursor:pointer
- 			&.router-link-active
+ 			&.router-link-active span
+ 				display:block
+ 				height:95%
  				color: #000
- 				border-bottom:1px solid #000
+ 				border-bottom:2px solid #000
 
  </style>

@@ -1,5 +1,5 @@
 <template>
-	<div class="music">
+	<div class="video">
 		视频
 	</div>
 </template>
@@ -7,9 +7,11 @@
 	export default {
 
 	}
-
 </script>
- <style lang="stylus" scoped>
- 	@import '../../common/stylus/public.styl'
 
- </style>
+<style lang="stylus" scoped>
+	@import '../../common/stylus/public.styl'
+	.video 
+		pt(36px)
+
+</style>

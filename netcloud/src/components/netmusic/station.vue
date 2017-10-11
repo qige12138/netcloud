@@ -10,6 +10,8 @@
 </script>
 
 <style lang="stylus" scoped>
-	
+	@import '../../common/stylus/public.styl'
+	.station 
+		pt(36px)
 
 </style>
