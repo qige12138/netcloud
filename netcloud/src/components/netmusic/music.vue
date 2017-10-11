@@ -20,7 +20,7 @@
         },  
         data() {  
             return {
-                items:['http://localhost:8080/static/img/timp1.jpg'],
+                items:['http://localhost:8080/static/img/timp1.jpg','http://localhost:8080/static/img/timp1.jpg','http://localhost:8080/static/img/timp1.jpg'],
                 swiperOption: {  
                     pagination: '.swiper-pagination',  
                     slidesPerView: 'auto',  
@@ -31,8 +31,7 @@
                         this.page = swiper.realIndex+1;  
                         this.index = swiper.realIndex;  
                     },  
-                }, 
-                swiperSlides: [1, 2, 3, 4, 5]  
+                }
             }  
         },  
         //定义这个sweiper对象  
