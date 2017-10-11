@@ -9,6 +9,8 @@ import Netheader from '@/components/netmusic/netheader'
 import Music from '@/components/netmusic/music'
 import Video from '@/components/netmusic/video'
 import Station from '@/components/netmusic/station'
+import Slide from '@/components/netmusic/slide'
+import Tab from '@/components/netmusic/tab'
 
 Vue.use(Router)
 
@@ -41,6 +43,14 @@ export default new Router({
         {
           path:'/station',
           component:Station
+        },
+        {
+          path:'/slide',
+          component:Slide
+        },
+        {
+          path:'/tab',
+          component:Tab
         }
       ]
     },
