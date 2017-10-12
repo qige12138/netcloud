@@ -1,8 +1,8 @@
 <template>
-	<div class="tab"> 
+	<div class="tab bd_bottom"> 
         <div class="t_c tab_nav">
             <div class="ic">
-                <i class="icon iconfont tabI t_c" >&#xe60c;</i>
+                <i class="icon iconfont tabI t_c" >&#xe650;</i>
             </div>
             <p>私人FM</p>
         </div>
@@ -15,7 +15,7 @@
         </div>
         <div class="t_c tab_nav">
             <div class="ic">
-                <i class="icon iconfont tabI t_c" >&#xe501;</i>
+                <i class="icon iconfont tabI t_c" >&#xe601;</i>
 
             </div>
             <p>歌单</p>
@@ -45,7 +45,7 @@
     @import '../../common/stylus/public.styl'
     .tab
         display:flex
-        pt(15px)
+        pad_(15px,0)
         .tab_nav
             flex:1
             .ic 

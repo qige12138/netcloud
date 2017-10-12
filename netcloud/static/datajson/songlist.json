@@ -1,0 +1,46 @@
+{
+	"recommend":[
+        {
+            "img":"http://localhost:8080/static/img/rec1.jpg",
+            "text":"推荐专辑1"
+        },
+        {
+            "img":"http://localhost:8080/static/img/rec2.jpg",
+            "text":"推荐专辑2"
+        },
+        {
+            "img":"http://localhost:8080/static/img/rec3.jpg",
+            "text":"推荐专辑3"
+        },
+        {
+            "img":"http://localhost:8080/static/img/rec1.jpg",
+            "text":"推荐专辑4"
+        },
+        {
+            "img":"http://localhost:8080/static/img/rec2.jpg",
+            "text":"推荐专辑5"
+        },
+        {
+            "img":"http://localhost:8080/static/img/rec3.jpg",
+            "text":"推荐专辑6"
+        }
+    ],
+    "exclusive":{
+        "list":[
+            {
+                "img":"http://localhost:8080/static/img/songex.jpg",
+                "text":"独家放送"
+            },
+            {
+                "img":"http://localhost:8080/static/img/songex.jpg",
+                "text":"独家放送"
+            }
+
+        ],
+        "bwrap":{
+            "img":"http://localhost:8080/static/img/songexb.jpg",
+            "text":"独家放送"
+        }
+
+    }
+}

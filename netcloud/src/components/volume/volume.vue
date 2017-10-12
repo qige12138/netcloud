@@ -25,7 +25,7 @@
 		<div class="creat">
 			<i class="icon iconfont down  t_c" :class="{'rota':!down}"  @click="view()">&#xe64b;</i><span
 			  @click="view()">创建的歌单</span><i
-			class="icon iconfont set t_r" ref="set">&#xe55a;</i>
+			class="icon iconfont set t_r" ref="set">&#xe600;</i>
 		</div>
 		<div class="creatSing" v-show="down">
 			<div>
