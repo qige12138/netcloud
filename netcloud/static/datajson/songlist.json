@@ -25,6 +25,32 @@
             "text":"推荐专辑6"
         }
     ],
+    "new":[
+        {
+            "img":"http://localhost:8080/static/img/rec1.jpg",
+            "text":"推荐专辑1"
+        },
+        {
+            "img":"http://localhost:8080/static/img/rec2.jpg",
+            "text":"推荐专辑2"
+        },
+        {
+            "img":"http://localhost:8080/static/img/rec3.jpg",
+            "text":"推荐专辑3"
+        },
+        {
+            "img":"http://localhost:8080/static/img/rec1.jpg",
+            "text":"推荐专辑4"
+        },
+        {
+            "img":"http://localhost:8080/static/img/rec2.jpg",
+            "text":"推荐专辑5"
+        },
+        {
+            "img":"http://localhost:8080/static/img/rec3.jpg",
+            "text":"推荐专辑6"
+        }
+    ],
     "exclusive":{
         "list":[
             {
@@ -39,8 +65,80 @@
         ],
         "bwrap":{
             "img":"http://localhost:8080/static/img/songexb.jpg",
-            "text":"独家放送"
+            "text":"独家放送1111"
         }
 
-    }
+    },
+    "exmv":{
+        "list":[
+            {
+                "img":"http://localhost:8080/static/img/songex.jpg",
+                "text":"独家放送"
+            },
+            {
+                "img":"http://localhost:8080/static/img/songex.jpg",
+                "text":"独家放送"
+            },
+            {
+                "img":"http://localhost:8080/static/img/songex.jpg",
+                "text":"独家放送"
+            },
+            {
+                "img":"http://localhost:8080/static/img/songex.jpg",
+                "text":"独家放送"
+            }
+
+        ]
+
+    },
+    "handpick":{
+        "list":[
+            {
+                "img":"http://localhost:8080/static/img/songex.jpg",
+                "text":"精选1精选1精选1精选精1选精1选精选精选",
+                "special":true,
+                "num":1400
+            },
+            {
+                "img":"http://localhost:8080/static/img/songex.jpg",
+                "text":"精选精2选精选2精选精选2精选精2选精选",
+                "special":true,
+                "num":800
+            },
+            {
+                "img":"http://localhost:8080/static/img/songex.jpg",
+                "text":"精选精3选精选精选精3选精选精选3精选",
+                "special":true,
+                "num":8000
+            }
+
+        ]
+
+    },
+    "anchor":[
+        {
+            "img":"http://localhost:8080/static/img/rec1.jpg",
+            "text":"主播电台1"
+        },
+        {
+            "img":"http://localhost:8080/static/img/rec2.jpg",
+            "text":"主播电台2"
+        },
+        {
+            "img":"http://localhost:8080/static/img/rec3.jpg",
+            "text":"主播电台3"
+        },
+        {
+            "img":"http://localhost:8080/static/img/rec1.jpg",
+            "text":"主播电台4"
+        },
+        {
+            "img":"http://localhost:8080/static/img/rec2.jpg",
+            "text":"主播电台5"
+        },
+        {
+            "img":"http://localhost:8080/static/img/rec3.jpg",
+            "text":"主播电台6"
+        }
+    ]
 }

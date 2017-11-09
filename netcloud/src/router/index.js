@@ -14,6 +14,9 @@ import Tab from '@/components/netmusic/tab'
 import Songtype from '@/components/netmusic/songtype'
 import Songlist6 from '@/components/netmusic/songlist6'
 import Songex from '@/components/netmusic/songex'
+import Exmv from '@/components/netmusic/exmv'
+import Handpick from '@/components/netmusic/handpick'
+import Musicfooter from '@/components/netmusic/musicfooter'
 
 Vue.use(Router)
 
@@ -66,6 +69,14 @@ export default new Router({
         {
           path:'/songex',
           component:Songex
+        },
+        {
+          path:'/exmv',
+          component:Exmv
+        },
+        {
+          path:'/musicfooter',
+          component:Musicfooter
         }
       ]
     },

@@ -1,15 +1,12 @@
 <template>
-	<div class="songEx"> 
+	<div class="exmv"> 
         <div class="listWrap">
             <div class="two">
-                <div class="wrap" v-for="item in list">
+                <div class="wrap f_l" v-for="item in list">
                     <img :src="item['img']">
                     <p>{{item['text']}}</p>
                 </div>
-            </div>
-            <div class="one">
-                <img :src="bwrap.img">
-                <p>{{bwrap.text}}</p>
+                <div style="clear: both"></div>
             </div>
         </div>
 	</div>
@@ -28,34 +25,27 @@
             this.$http.get('http://localhost:8080/static/datajson/songlist.json').then(res => {
                 this.data = res.body[this.songtype];
                 this.list = this.data.list;
-                this.bwrap = this.data.bwrap;
             });
         }
 	}
 
 </script>
 <style lang="stylus" scoped>
-    @import '../../common/stylus/public.styl'
-    .songEx
-        font_s(12px)
-        .two
-            display:flex
+    @import '../../common/stylus/public.styl'   
+    .exmv
+        .listWrap
+            font_s(12px)
             .wrap
-                flex:1
-                &:nth-child(1)
+                w(50%)
+                &:nth-child(1),&:nth-child(3)
                     bs()
                     pr(1px)
-                &:nth-child(2)
+                &:nth-child(2),&:nth-child(4)
                     bs()
                     pl(1px)
                 p
                     height:55px
                     pad_(10px,0)
                     lh(20px)
-        .one
-            p
-                height:55px
-                pad_(10px,0)
-                lh(20px)     
             
 </style>

@@ -14,12 +14,25 @@ $fonts_22 = 22px
 font_s($num)
   font-size:$num
 
-
+w($num)
+  width:$num
+h($num)
+  height:$num
 bg_image($url)
   background-image: url($url + ".png")
   background-size:100% 100%
 lh($num)
   line-height:$num
+ellipsis($num)
+  overflow: hidden
+  text-overflow: ellipsis
+  display: -webkit-box
+  -webkit-line-clamp: $num 
+  -webkit-box-orient: vertical
+// 去除按钮默认样式
+btn() 
+  user-select:none
+  touch-action:manipulation
 
 // 不换行
 no_wrap()

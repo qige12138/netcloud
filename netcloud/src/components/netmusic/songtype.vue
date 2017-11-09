@@ -17,4 +17,9 @@
             pl(8px)
             border-left:2px solid #000
             font-size:$fonts_16
+            i
+                font_s(22px)
+                position:relative
+                top:2px
+                
 </style>

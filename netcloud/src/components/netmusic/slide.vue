@@ -28,6 +28,7 @@
                     slidesPerView: 'auto',  
                     centeredSlides: true,  
                     paginationClickable: true,
+                    loop : true,
                     onSlideChangeEnd: swiper => {  
                         this.page = swiper.realIndex+1;  
                         this.index = swiper.realIndex;  
