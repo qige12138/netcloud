@@ -1,26 +1,53 @@
 <template>
 	<div class="collectsing">
 		<div class="creat">
-			<i class="icon iconfont down  t_c" :class="{'rota':!down}"  @click="view()">&#xe64b;</i><span
-			  @click="view()">创建的歌单</span><i
+			<i class="icon iconfont down  t_c" :class="{'rota':!down_0}"  @click="view(0)">&#xe64b;</i><span
+			  @click="view(0)">创建的歌单</span><i
 			class="icon iconfont set t_r" ref="set">&#xe600;</i>
 		</div>
-		<div class="creatSing" v-show="down">
+		<div class="creatSing" v-show="down_0">
 			<div>
-				<router-link tag="div" to="" class="singImg">
+				<router-link tag="div" to="" class="singImg" @click.native="golist()">
 					<img src="../../common/img/timg.jpg">
 				</router-link><router-link
-				 tag="div" to="" class="singName bd_bottom">
+				 tag="div" to="" class="singName bd_bottom" @click.native="golist()">
+					<p>我喜欢的音乐</p>
+					<p>99首</p>
+				</router-link><i
+				 class="icon iconfont t_c bd_bottom">&#xe60e;</i>
+			</div>
+			<div>
+				<router-link tag="div" to="" class="singImg" @click.native="golist()">
+					<img src="../../common/img/timp1.jpg">
+				</router-link><router-link
+				 tag="div" to="" class="singName bd_bottom" @click.native="golist()">
+					<p>哼哼</p>
+					<p>10首</p>
+				</router-link><i
+				 class="icon iconfont t_c bd_bottom">&#xe60e;</i>
+			</div>
+		</div>
+		<div class="creat">
+			<i class="icon iconfont down  t_c" :class="{'rota':!down_1}"  @click="view(1)">&#xe64b;</i><span
+			  @click="view(1)">收藏的歌单</span><i
+			class="icon iconfont set t_r" ref="set">&#xe600;</i>
+		</div>
+		<div class="creatSing" v-show="down_1">
+			<div>
+				<router-link tag="div" to="" @click.native="golist()" class="singImg">
+					<img src="../../common/img/timg.jpg">
+				</router-link><router-link
+				 tag="div" to="" @click.native="golist()" class="singName bd_bottom">
 					<p>收藏的音乐</p>
 					<p>99首</p>
 				</router-link><i
 				 class="icon iconfont t_c bd_bottom">&#xe60e;</i>
 			</div>
 			<div>
-				<router-link tag="div" to="" class="singImg">
+				<router-link tag="div" to="" @click.native="golist()" class="singImg">
 					<img src="../../common/img/timp1.jpg">
 				</router-link><router-link
-				 tag="div" to="" class="singName bd_bottom">
+				 tag="div" to="" @click.native="golist()" class="singName bd_bottom">
 					<p>收藏的音乐</p>
 					<p>10首</p>
 				</router-link><i
@@ -34,13 +61,24 @@
 	export default {
 		data() {
 			return {
-				down:true
+				down_0:true,
+				down_1:true,
+				msg:'listMsg'
 			}
 		},
+		mounted() {
+		},
 		methods:{
-			view:function(e) {
-				let down = this['down'];
-				this['down'] = down ? false : true;
+			view(e) {
+				let down = 'down_' + e;
+				let downC = this[down];
+				this[down] = downC ? false : true;
+			},
+			golist() {
+				this.$emit('headerMsg',this.msg);
+				this.$router.push({
+					path:'/list'
+				})
 			}
 
 		}
@@ -54,6 +92,7 @@
 			height:28px
 			line-height:28px
 			background: #e0e0e0
+			overflow:hidden
 			.down
 				dis_inb()
 				width: 30px
@@ -71,7 +110,6 @@
 		.creatSing 
 			bs()
 			padding:4px 0 4px 4px
-			height:58px
 			.singImg 
 				dis_inb()
 				pr(4px)

@@ -29,6 +29,7 @@
                     centeredSlides: true,  
                     paginationClickable: true,
                     loop : true,
+                    autoplayDisableOnInteraction:false,
                     onSlideChangeEnd: swiper => {  
                         this.page = swiper.realIndex+1;  
                         this.index = swiper.realIndex;  

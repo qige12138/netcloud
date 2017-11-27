@@ -21,8 +21,18 @@ h($num)
 bg_image($url)
   background-image: url($url + ".png")
   background-size:100% 100%
+bg_color($num)
+  background-color:$num
 lh($num)
   line-height:$num
+overflow_h() 
+  overflow:hidden
+// 单行超出隐藏
+overflow_t()
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+// 多行超出隐藏
 ellipsis($num)
   overflow: hidden
   text-overflow: ellipsis
@@ -34,11 +44,7 @@ btn()
   user-select:none
   touch-action:manipulation
 
-// 不换行
-no_wrap()
-  text-overflow: ellipsis
-  overflow: hidden
-  white-space: nowrap
+
 
 // 扩展点击区域
 extend_click()
@@ -68,6 +74,12 @@ pad($num)
   padding:$num
 pad_($num1,$num2)
   padding:$num1 $num2
+re() 
+  position:relative
+ab()
+  position:absolute
+fi()
+  position:fixed
 
 
 

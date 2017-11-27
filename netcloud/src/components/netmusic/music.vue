@@ -42,7 +42,5 @@
 </script>
 <style lang="stylus" scoped>
 	@import '../../common/stylus/public.styl'
-	.music 
-		pt(36px)
 
 </style>

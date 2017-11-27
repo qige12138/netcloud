@@ -10,6 +10,5 @@
 </script>
 
 <style lang="stylus">
-	.circle 
-		padding-top:48px
+	
 </style>

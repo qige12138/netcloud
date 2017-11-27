@@ -22,34 +22,7 @@
 				class="tabName bd_bottom">我的收藏<span class="num">(0)</span></span>
 			</router-link>
 		</div>
-		<div class="creat">
-			<i class="icon iconfont down  t_c" :class="{'rota':!down}"  @click="view()">&#xe64b;</i><span
-			  @click="view()">创建的歌单</span><i
-			class="icon iconfont set t_r" ref="set">&#xe600;</i>
-		</div>
-		<div class="creatSing" v-show="down">
-			<div>
-				<router-link tag="div" to="" class="singImg">
-					<img src="../../common/img/timg.jpg">
-				</router-link><router-link
-				 tag="div" to="" class="singName bd_bottom">
-					<p>我喜欢的音乐</p>
-					<p>99首</p>
-				</router-link><i
-				 class="icon iconfont t_c bd_bottom">&#xe60e;</i>
-			</div>
-			<div>
-				<router-link tag="div" to="" class="singImg">
-					<img src="../../common/img/timp1.jpg">
-				</router-link><router-link
-				 tag="div" to="" class="singName bd_bottom">
-					<p>哼哼</p>
-					<p>10首</p>
-				</router-link><i
-				 class="icon iconfont t_c bd_bottom">&#xe60e;</i>
-			</div>
-		</div>
-		<collect-sing></collect-sing>
+		<collect-sing v-on:headerMsg="recieveColl"></collect-sing>
 	</div>
 </template>
 <script>
@@ -60,13 +33,11 @@
 		},
 		data() {
 			return {
-				down:true
 			}
 		},
 		methods:{
-			view(e) {
-				let down = this['down'];
-				this['down'] = down ? false : true;
+			recieveColl(text) {
+				this.$emit('rouerMsg',text);
 			}
 
 		}
@@ -77,7 +48,6 @@
 <style lang="stylus" scoped>
 	@import '../../common/stylus/public.styl'
 	.volume 
-		padding-top:48px
 		font-size:$fonts_14
 		color:$color_th
 		.volumeTab 

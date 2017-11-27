@@ -15,6 +15,5 @@
 </script>
 
 <style lang="stylus">
-	.netmusic 
-		padding-top:48px
+	
 </style>
