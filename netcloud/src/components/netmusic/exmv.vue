@@ -2,9 +2,21 @@
 	<div class="exmv"> 
         <div class="listWrap">
             <div class="two">
-                <div class="wrap f_l" v-for="item in list">
-                    <img :src="item['img']">
-                    <p>{{item['text']}}</p>
+                <div class="wrap f_l">
+                    <img src="../../common/img/songex.jpg">
+                    <p>推荐MV</p>
+                </div>
+                <div class="wrap f_l">
+                    <img src="../../common/img/songex.jpg">
+                    <p>推荐MV</p>
+                </div>
+                <div class="wrap f_l">
+                    <img src="../../common/img/songex.jpg">
+                    <p>推荐MV</p>
+                </div>
+                <div class="wrap f_l">
+                    <img src="../../common/img/songex.jpg">
+                    <p>推荐MV</p>
                 </div>
                 <div style="clear: both"></div>
             </div>
@@ -22,10 +34,7 @@
         },
         props:['songtype'],
         created() {
-            this.$http.get('http://localhost:8080/static/datajson/songlist.json').then(res => {
-                this.data = res.body[this.songtype];
-                this.list = this.data.list;
-            });
+            
         }
 	}
 

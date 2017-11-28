@@ -2,16 +2,19 @@
 	<div class="list">
 		<header-text></header-text>	
 		<list-msg></list-msg>
+		<list-song></list-song>
 	</div>
 </template>
 <script>
 	import Bus from '../../common/js/bus.js'
 	import headerText from './headertext.vue'
 	import listMsg from './listmsg.vue'
+	import listSong from './listsong.vue'
 	export default {
 		components:{
 			headerText,
-			listMsg
+			listMsg,
+			listSong
 		},
 		created(){
 			this.$nextTick(() => {

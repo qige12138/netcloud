@@ -1,16 +1,40 @@
 <template>
 	<div class="handpick bd_top"> 
-        <div class="list bd_bottom" v-for="item in list">
+        <div class="list bd_bottom">
         	<div class="list_l">
         		<div>
         			<span>专栏</span>
-        			<span>{{item['text']}}</span>
+        			<span>精选1精选1精选1精选精1选精1选精选精选</span>
         		</div>
-        		<p>阅读 <span>{{item['num']}}</span></p>
+        		<p>阅读 <span>800</span></p>
         	</div>
         	<div class="list_r">
-        		<img :src="item['img']">
+        		<img src="../../common/img/songex.jpg">
         	</div>
+        </div>
+        <div class="list bd_bottom">
+            <div class="list_l">
+                <div>
+                    <span>专栏</span>
+                    <span>精选1精选1精选1精选精1选精1选精选精选</span>
+                </div>
+                <p>阅读 <span>800</span></p>
+            </div>
+            <div class="list_r">
+                <img src="../../common/img/songex.jpg">
+            </div>
+        </div>
+        <div class="list bd_bottom">
+            <div class="list_l">
+                <div>
+                    <span>专栏</span>
+                    <span>精选1精选1精选1精选精1选精1选精选精选</span>
+                </div>
+                <p>阅读 <span>800</span></p>
+            </div>
+            <div class="list_r">
+                <img src="../../common/img/songex.jpg">
+            </div>
         </div>
 	</div>
 </template>
@@ -22,10 +46,7 @@
 			}
 		},
 		created() {
-			this.$http.get('http://localhost:8080/static/datajson/songlist.json').then(res =>{
-				this.data = res.body['handpick'];
-                this.list = this.data.list;
-			})
+			
 		}
 	}
 

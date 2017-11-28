@@ -22,6 +22,24 @@
 				</div>
 			</div>
 		</div>
+		<div class="msgData t_c">
+			<div>
+				<i class="icon iconfont">&#xe7a3;</i>
+				<p>8178</p>
+			</div>
+			<div>
+				<i class="icon iconfont">&#xe6a7;</i>
+				<p>8178</p>
+			</div>
+			<div>
+				<i class="icon iconfont">&#xe638;</i>
+				<p>8178</p>
+			</div>
+			<div>
+				<i class="icon iconfont">&#xe64c;</i>
+				<p>下载</p>
+			</div>
+		</div>
 	</div>
 </template>
 <script>
@@ -34,11 +52,11 @@
 	@import '../../common/stylus/public.styl'
 	.listmsg
 		bs()
-		pad(10px 25px)
 		bg_color(rgb(71,74,60))
 		color:$color_ff
 		.msgHeader 
 			display:flex
+			pad(10px 25px)
 			.imgMsg
 				flex:12
 				re()
@@ -80,7 +98,7 @@
 							ab()
 							color:#ffbd20
 							border-radius:50%
-							font_s(8px)
+							font_s(10px)
 							right:-3px
 							bottom:0
 					span
@@ -90,6 +108,17 @@
 						font_s(14px)
 						i
 							pl(5px)
+		.msgData
+			display:flex
+			pt(10px)
+			&>div
+				flex:1
+				i 
+					font_s(20px)
+				p
+					lh(28px)
+					font_s(14px)
+					color:#c4c7c3
 				
 		
 </style>

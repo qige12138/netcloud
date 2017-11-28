@@ -1,11 +1,15 @@
 <template>
 	<div class="slide">
 		<swiper :options="swiperOption"  ref="mySwiper">  
-            <!-- 这部分放你要渲染的那些内容 -->  
-            <swiper-slide v-for="item in items" :key="item"> 
-                <img :src="item">
+            <swiper-slide > 
+                <img src="../../common/img/timg.jpg">
+            </swiper-slide> 
+             <swiper-slide > 
+                <img src="../../common/img/timp1.jpg">
+            </swiper-slide> 
+             <swiper-slide > 
+                <img src="../../common/img/logo.png">
             </swiper-slide>  
-            <!-- 这是轮播的小圆点 -->  
             <div class="swiper-pagination" slot="pagination"></div>  
         </swiper>  
 	</div>
@@ -21,7 +25,6 @@
         },  
         data() {  
             return {
-                items:['http://localhost:8080/static/img/timp1.jpg','http://localhost:8080/static/img/timp1.jpg','http://localhost:8080/static/img/timp1.jpg'],
                 swiperOption: {  
                     pagination: '.swiper-pagination', 
                     autoplay:'3000', 

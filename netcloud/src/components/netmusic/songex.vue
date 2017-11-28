@@ -2,14 +2,24 @@
 	<div class="songEx"> 
         <div class="listWrap">
             <div class="two">
-                <div class="wrap" v-for="item in list">
-                    <img :src="item['img']">
-                    <p>{{item['text']}}</p>
+                <div class="wrap">
+                    <div class="wrapImg">
+                        <img src="../../common/img/songex.jpg">
+                    </div>
+                    <p>独家放松</p>
+                </div>
+                <div class="wrap">
+                    <div class="wrapImg">
+                        <img src="../../common/img/songex.jpg">
+                    </div>
+                    <p>独家放松</p>
                 </div>
             </div>
             <div class="one">
-                <img :src="bwrap.img">
-                <p>{{bwrap.text}}</p>
+                <div class="oneImg">
+                    <img src="../../common/img/songexb.jpg">
+                </div>
+                <p>独家放松</p>
             </div>
         </div>
 	</div>
@@ -25,11 +35,7 @@
         },
         props:['songtype'],
         created() {
-            this.$http.get('http://localhost:8080/static/datajson/songlist.json').then(res => {
-                this.data = res.body[this.songtype];
-                this.list = this.data.list;
-                this.bwrap = this.data.bwrap;
-            });
+            
         }
 	}
 
@@ -48,11 +54,19 @@
                 &:nth-child(2)
                     bs()
                     pl(1px)
+                .wrapImg
+                    img_div(70%)
+                    img
+                        img_sc()
                 p
                     height:55px
                     pad_(10px,0)
                     lh(20px)
         .one
+            .oneImg
+                img_div(50%)  
+                img
+                        img_sc()
             p
                 height:55px
                 pad_(10px,0)
