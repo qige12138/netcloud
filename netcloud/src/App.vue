@@ -1,7 +1,7 @@
 <template>
   <div id="app">
   	<my-header v-show="headerShow"></my-header>
-    <router-view v-on:rouerMsg="rouerMsg"></router-view>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -11,22 +11,30 @@ import Bus from './common/js/bus.js'
 
 export default {
 	name: 'app',
+	components: {
+	  myHeader
+	},
 	data() {
 		return {
 			headerShow:true
 		}
 	},
 	mounted() {
-		Bus.$on('headerMsg',(data) => {
-			this.headerShow = false;
-		})
-	},
-	components: {
-	  myHeader
+		this.changeHeader();
 	},
 	methods:{
-		rouerMsg(text) {
-			this.headerShow = false;
+		changeHeader() {
+			let rou = this.$route;
+			if(rou.path == '/volume' || rou.path == '/music' || rou.path == '/circle') {
+				this.headerShow = true;
+			} else {
+				this.headerShow = false;
+			}
+		}
+	},
+	watch:{
+		$route(rou){
+			this.changeHeader();
 		}
 	}
 }

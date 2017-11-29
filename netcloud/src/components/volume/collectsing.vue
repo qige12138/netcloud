@@ -75,7 +75,6 @@
 				this[down] = downC ? false : true;
 			},
 			golist() {
-				this.$emit('headerMsg',this.msg);
 				this.$router.push({
 					path:'/list'
 				})

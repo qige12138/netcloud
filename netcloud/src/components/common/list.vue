@@ -2,11 +2,11 @@
 	<div class="list">
 		<header-text></header-text>	
 		<list-msg></list-msg>
-		<list-song></list-song>
+		<list-song v-on:goSong="goSing"></list-song>
 	</div>
 </template>
 <script>
-	import Bus from '../../common/js/bus.js'
+	import Bus from '@/common/js/bus.js'
 	import headerText from './headertext.vue'
 	import listMsg from './listmsg.vue'
 	import listSong from './listsong.vue'
@@ -20,6 +20,13 @@
 			this.$nextTick(() => {
 				Bus.$emit('headerMsg');
 			});
+		},
+		methods:{
+			goSing() {
+				this.$router.push({
+					path:'/sing'
+				})
+			}
 		}
 	}
 </script>

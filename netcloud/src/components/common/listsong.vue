@@ -16,7 +16,7 @@
 					1
 				</div>
 				<div class="bd_bottom singMsg">
-					<div>
+					<div  @click="goSong()">
 						<p>红玫瑰</p>
 						<p>陈奕迅-红玫瑰</p>
 					</div>
@@ -30,7 +30,7 @@
 					1
 				</div>
 				<div class="bd_bottom singMsg">
-					<div>
+					<div@click="goSong()">
 						<p>红玫瑰</p>
 						<p>陈奕迅-红玫瑰</p>
 					</div>
@@ -86,7 +86,11 @@
 </template>
 <script>
 	export default {
-		
+		methods:{
+			goSong() {
+				this.$emit('goSong')
+			}
+		}
 	}
 </script>
 

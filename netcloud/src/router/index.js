@@ -8,6 +8,7 @@ import Music from '@/components/netmusic/music'
 import Video from '@/components/netmusic/video'
 import Station from '@/components/netmusic/station'
 import List from '@/components/common/list'
+import Sing from '@/components/common/sing'
 
 Vue.use(Router)
 
@@ -50,6 +51,10 @@ export default new Router({
     {
       path:'/list',
       component:List
+    },
+    {
+      path:'/sing',
+      component:Sing
     }
     
 
