@@ -7,7 +7,6 @@
 
 <script>
 import myHeader from './components/myheader/myheader'
-import Bus from './common/js/bus.js'
 
 export default {
 	name: 'app',

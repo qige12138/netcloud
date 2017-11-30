@@ -1,6 +1,6 @@
 <template>
 	<div class="sing">
-		<div class="head bd_bottom">
+		<div class="head">
 			<div>
 				<i class="icon iconfont">&#xe617;</i>
 			</div>
@@ -12,18 +12,57 @@
 				<i class="icon iconfont">&#xe638;</i>
 			</div>
 		</div>
-		<div class="singImg">
-			<img src="../../common/img/bang.png" class="bang">
-			<div class="pan">
-				
+		<sing-img :sing-img="singImgUrl" v-show="singImgShow"></sing-img>
+		<lyric :lyric-obj="lyricObj" v-show="!singImgShow"></lyric>
+		<div class="player" ref="player">
+			<div class="progress">
+				<div class="st">00:00</div>
+				<div class="proBar">
+					<div class="curBar"></div>
+					<div class="allBar"></div>
+					<div class="conBar"></div>
+				</div>
+				<div class="at t_r">04:00</div>
+			</div>
+			<div class="control">
+				<i class="icon iconfont cond">&#xe67b;</i>
+				<div class="cont">
+					<i class="icon iconfont pre">&#xe78a;</i>
+					<!-- 暂停&#xe60b; -->
+					<i class="icon iconfont play t_c">&#xe684;</i>
+					<i class="icon iconfont next">&#xe7a5;</i>
+				</div>
+				<i class="icon iconfont cond t_r">&#xe6fa;</i>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
 	import Bus from '@/common/js/bus.js'
+	import singImg from './singimg'
+	import Lyric from './lyric'
 	export default {
+		components:{
+			singImg,
+			Lyric
+		},
+		data() {
+			return {
+				winHeight:document.body.clientHeight,
+				singImgUrl:null,
+				lyricObj:{
+					conHeight:null,
+					sing:null
+				},
+				singImgShow:false
 
+			}
+		},
+		mounted() {
+			let playerHeight = this.$refs.player.clientHeight;
+			this.lyricObj['conHeight'] = this.winHeight - 60 - playerHeight;
+		}
+		
 	}
 </script>
 
@@ -65,17 +104,62 @@
 					extend_click()
 					&:nth-child(1)
 						margin-right:16px
-		.singImg
-			.bang
-				width:24.1%
-				margin-left:47%
-			.pan
-				width:75%
-				height:0
-				pb(75%)
-				re()
-				left:12.5%
-				bg_image('../../common/img/pan.png')
+		.player
+			fi()
+			bottom:0
+			color:#d0c8c3
+			height:67px
+			width:92%
+			padding:0 4% 3%
+			.progress
+				display:flex
+				margin-bottom:15px
+				heihgt:12px
+				lh(12px)
+				.st,.at
+					font_s(10px)
+					flex:1
+				.proBar
+					flex:7
+					re()
+					.curBar,.allBar
+						ab()
+						height:2px
+						top:4px
+					.curBar
+						width:50%
+						bg_color(#d33a31)
+						z-index:4
+					.allBar
+						width:100%
+						bg_color(#d0c8c3)
+						z-index:3
+					.conBar
+						ab()
+						width:14px
+						height:14px
+						border-radius:50%
+						bg_color(#fff);
+						z-index:5
+						top:-2px
+						left:50%
+			.control
+				display:flex
+				height:40px
+				lh(40px)
+				i
+					font_s(20px)
+				.cond
+					flex:1
+				.cont
+					flex:2.5
+					display:flex
+					.pre,.next
+						flex:13
+					.play
+						flex:74
+						font_s(40px)
+					
 			
 		
 				

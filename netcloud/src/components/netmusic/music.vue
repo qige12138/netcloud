@@ -18,14 +18,14 @@
 	</div>
 </template>
 <script>
-	import Swiper from './slide.vue'
-	import Tab from './tab.vue'
-	import songType from './songtype.vue'
-	import songList6 from './songlist6.vue'
-	import songEx from './songex.vue'
-	import exMv from './exmv.vue'
-	import handPick from './handpick.vue'
-	import musicFooter from './musicfooter.vue'
+	import Swiper from './slide'
+	import Tab from './tab'
+	import songType from './songtype'
+	import songList6 from './songlist6'
+	import songEx from './songex'
+	import exMv from './exmv'
+	import handPick from './handpick'
+	import musicFooter from './musicfooter'
 	export default{ 
 		components:{
 			Swiper,

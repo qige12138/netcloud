@@ -7,9 +7,9 @@
 </template>
 <script>
 	import Bus from '@/common/js/bus.js'
-	import headerText from './headertext.vue'
-	import listMsg from './listmsg.vue'
-	import listSong from './listsong.vue'
+	import headerText from './headertext'
+	import listMsg from './listmsg'
+	import listSong from './listsong'
 	export default {
 		components:{
 			headerText,
