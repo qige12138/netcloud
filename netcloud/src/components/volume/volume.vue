@@ -59,6 +59,8 @@
 				dis_inb()
 				width:50px
 				font-size:$fonts_22
+				position:relative
+				top:2px
 			.tabName 
 				dis_inb()
 				width:calc(100% - 50px)

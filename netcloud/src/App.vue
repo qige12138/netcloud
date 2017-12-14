@@ -24,7 +24,7 @@ export default {
 	methods:{
 		changeHeader() {
 			let rou = this.$route;
-			if(rou.path == '/volume' || rou.path == '/music' || rou.path == '/circle') {
+			if(rou.path == '/volume' || rou.path == '/music' || rou.path == '/circle' || rou.path == "/video" || rou.path == "/station") {
 				this.headerShow = true;
 			} else {
 				this.headerShow = false;

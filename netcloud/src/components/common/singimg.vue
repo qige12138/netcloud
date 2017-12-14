@@ -1,10 +1,10 @@
 <template>
-	<div class="singImg">
+	<div class="singImg" ref="singImgC">
 		<div class="singer bd_top">
-			<img src="../../common/img/bang.png" class="bang">
+			<img src="../../common/img/bang.png" class="bang" :class="{'pause':!playb}">
 			<div class="pan">
 				<div>
-					<img src="../../common/img/songexb.jpg">
+					<img src="../../common/img/rec1.jpg" ref="singImg">
 				</div>
 			</div>
 		</div>
@@ -26,11 +26,39 @@
 	</div>
 </template>
 <script>
-	import Bus from '@/common/js/bus.js'
+	import Bus from '@/common/js/bus'
+	import {getColor} from '@/common/js/getimgcolor'
 	export default {
-		prop:['singImg'],
+		data() {
+			return {
+				playb:false
+			}
+		},
+		props:['singImg'],
 		mounted() {
-			// console.info(this.singImg)
+			this.$nextTick(() =>{
+				this.getImgColor();
+				this.$refs.singImgC.style.height = this.singImg.conHeight + 'px';
+				Bus.$on('playB',(playb) => {
+					this.playb = playb;
+				});
+			});
+		},
+		methods: {
+			//获取图片的主色和次色 dominant主色  secondary次色
+			getImgColor() {
+				let self = this;
+				let singImg = this.$refs.singImg;
+				RGBaster.colors(singImg, {
+				  	success(payload) {
+					    let bgColor = {
+					    	s:payload.dominant,
+					    	e:payload.secondary
+					    };
+					    self.$emit('changeBg',bgColor);
+					}
+				});
+			}
 		}
 	}
 </script>
@@ -38,13 +66,19 @@
 <style lang="stylus" scoped>
 	@import '../../common/stylus/public.styl'
 	.singImg
+		overflow_h()
 		.singer
 			re()
 			.bang
 				width:24.1%
 				margin-left:47%
+				top:-2px
 				re()
 				z-index:4
+				transform-origin:15.1515% 0
+				transition:all .5s linear
+				&.pause
+					transform:rotate(-30deg)
 			.pan
 				width:75%
 				height:0

@@ -1,5 +1,5 @@
 <template>
-	<div class="sing">
+	<div class="sing" ref="sing">
 		<div class="head">
 			<div>
 				<i class="icon iconfont">&#xe617;</i>
@@ -12,7 +12,7 @@
 				<i class="icon iconfont">&#xe638;</i>
 			</div>
 		</div>
-		<sing-img :sing-img="singImgUrl" v-show="singImgShow"></sing-img>
+		<sing-img :sing-img="singImgObj" @changeBg="bgColor" v-show="singImgShow"></sing-img>
 		<lyric :lyric-obj="lyricObj" v-show="!singImgShow"></lyric>
 		<div class="player" ref="player">
 			<div class="progress">
@@ -27,12 +27,12 @@
 			<div class="control">
 				<i class="icon iconfont cond">&#xe67b;</i>
 				<div class="cont">
-					<i class="icon iconfont pre">&#xe78a;</i>
+					<i class="icon iconfont pre" @click="pre">&#xe78a;</i>
 					<!-- 暂停&#xe60b; -->
-					<i class="icon iconfont play t_c">&#xe684;</i>
-					<i class="icon iconfont next">&#xe7a5;</i>
+					<i class="icon iconfont play t_c" v-html="playIcon" @click="opa"></i>
+					<i class="icon iconfont next" @click="next">&#xe7a5;</i>
 				</div>
-				<i class="icon iconfont cond t_r">&#xe6fa;</i>
+				<i class="icon iconfont cond t_r" >&#xe6fa;</i>
 			</div>
 		</div>
 	</div>
@@ -49,18 +49,58 @@
 		data() {
 			return {
 				winHeight:document.body.clientHeight,
-				singImgUrl:null,
+				singImgObj:{},
 				lyricObj:{
 					conHeight:null,
 					sing:null
 				},
-				singImgShow:false
-
+				singImgShow:true,
+				play:'&#xe684;',
+				pause:'&#xe60b;',
+				playIcon:null,
+				playB:false,
+				colorArr:[]
 			}
 		},
 		mounted() {
-			let playerHeight = this.$refs.player.clientHeight;
-			this.lyricObj['conHeight'] = this.winHeight - 60 - playerHeight;
+			let playerHeight = this.$refs.player.clientHeight,
+				conHeight = this.winHeight - 60 - playerHeight;
+			this.lyricObj['conHeight'] = conHeight;
+			this.singImgObj['conHeight'] = conHeight;
+			this.playIcon = this.play;
+		},
+		methods: {
+			bgColor(bgColor) {
+				let color = bgColor['s'].slice(4,-1).split(',');
+				for(let val of color) {
+					this.colorArr.push( 255 - Number(val));
+				}
+				this.$refs.sing.style.backgroundImage = "linear-gradient(200deg, " + bgColor['s'] + "," + bgColor['e'] + ")";
+			},
+			//上一首
+			pre() {
+				this.changeSong('left')
+			},
+			//下一首
+			next() {
+				this.changeSong('right')
+			},
+			//播放暂停
+			opa() {
+				if(!this.playB) {//播放
+					this.playB = true;
+					this.playIcon = this.pause;
+				} else {//暂停
+					this.playIcon = this.play;
+					this.playB = false;
+				}
+				Bus.$emit('playB',this.playB);
+
+			},
+			//上下一首
+			changeSong(index) {
+				'left' == index ? console.info('上一首') : console.info('下一首'); 
+			}
 		}
 		
 	}
@@ -71,9 +111,7 @@
 	.sing
 		height:100%	
 		overflow_h()
-		bg_color(#474a3c)
 		.head
-			bg_color(rgb(71,74,60))
 			color:#Fff
 			height:54px
 			display:flex
@@ -156,6 +194,7 @@
 					display:flex
 					.pre,.next
 						flex:13
+						extend_click()
 					.play
 						flex:74
 						font_s(40px)
