@@ -2,9 +2,9 @@
 	<div class="singImg" ref="singImgC">
 		<div class="singer bd_top">
 			<img src="../../common/img/bang.png" class="bang" :class="{'pause':!playb}">
-			<div class="pan">
+			<div class="pan" :class="{'pause':!playb}">
 				<div>
-					<img src="../../common/img/rec1.jpg" ref="singImg">
+					<img src="../../common/img/rec2.jpg" ref="singImg">
 				</div>
 			</div>
 		</div>
@@ -23,6 +23,7 @@
 				<i class="icon iconfont">&#xe60e;</i>
 			</div>
 		</div>
+		
 	</div>
 </template>
 <script>
@@ -31,16 +32,18 @@
 	export default {
 		data() {
 			return {
-				playb:false
+				playb:false,
+				sion:null
 			}
 		},
 		props:['singImg'],
 		mounted() {
-			this.$nextTick(() =>{
-				this.getImgColor();
-				this.$refs.singImgC.style.height = this.singImg.conHeight + 'px';
+			let self = this;
+			self.$nextTick(() =>{
+				self.getImgColor();
+				self.$refs.singImgC.style.height = this.singImg.conHeight + 'px';
 				Bus.$on('playB',(playb) => {
-					this.playb = playb;
+					self.playb = playb;
 				});
 			});
 		},
@@ -72,7 +75,6 @@
 			.bang
 				width:24.1%
 				margin-left:47%
-				top:-2px
 				re()
 				z-index:4
 				transform-origin:15.1515% 0
@@ -90,6 +92,13 @@
 				text-align:center
 				bs()
 				bg_image('../../common/img/pan.png')
+				animation:panrun 36s linear infinite forwards
+				&.pause
+					animation-play-state:paused
+				@keyframes panrun {
+					from {transform:rotate(0);}
+					to {transform:rotate(360deg);}
+				}	
 				div
 					dis_inb()
 					width:62%

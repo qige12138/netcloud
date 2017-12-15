@@ -22,7 +22,7 @@
 					<div class="allBar"></div>
 					<div class="conBar"></div>
 				</div>
-				<div class="at t_r">04:00</div>
+				<div class="at t_r">{{songT}}</div>
 			</div>
 			<div class="control">
 				<i class="icon iconfont cond">&#xe67b;</i>
@@ -35,6 +35,7 @@
 				<i class="icon iconfont cond t_r" >&#xe6fa;</i>
 			</div>
 		</div>
+		<audio src="/static/media/xcds.mp3" class="none" preload="load" ref="sion"></audio>
 	</div>
 </template>
 <script>
@@ -49,33 +50,56 @@
 		data() {
 			return {
 				winHeight:document.body.clientHeight,
-				singImgObj:{},
-				lyricObj:{
-					conHeight:null,
-					sing:null
+				singImgObj:{},//歌曲封面数据
+				lyricObj:{//歌词组件数据
+					conHeight:null,//组件高度
+					sing:null//歌词
 				},
 				singImgShow:true,
-				play:'&#xe684;',
-				pause:'&#xe60b;',
-				playIcon:null,
-				playB:false,
-				colorArr:[]
+				play:'&#xe684;',//播放icon
+				pause:'&#xe60b;',//暂停icon
+				playIcon:null,//界面按钮icon
+				playB:false,//播放状态
+				colorArr:[],//图片颜色反色数组 r g b
+				song:null,//歌曲DOM
+				songLongT:0,//歌曲时间 数字格式
+				songT:0//歌曲时间 时分格式
 			}
 		},
 		mounted() {
-			let playerHeight = this.$refs.player.clientHeight,
-				conHeight = this.winHeight - 60 - playerHeight;
-			this.lyricObj['conHeight'] = conHeight;
-			this.singImgObj['conHeight'] = conHeight;
-			this.playIcon = this.play;
+			let self = this;
+			let playerHeight = self.$refs.player.clientHeight,
+				conHeight = self.winHeight - 60 - playerHeight;
+			self.lyricObj['conHeight'] = conHeight;
+			self.singImgObj['conHeight'] = conHeight;
+			self.playIcon = self.play;
+			self.$nextTick(() => {
+				self.song = self.$refs.sion;
+				self.initPage();
+			});
 		},
 		methods: {
+			//根据歌手图片渲染页面背景 主色:bgColor['s']  次色:bgColor['e']
 			bgColor(bgColor) {
 				let color = bgColor['s'].slice(4,-1).split(',');
 				for(let val of color) {
 					this.colorArr.push( 255 - Number(val));
 				}
 				this.$refs.sing.style.backgroundImage = "linear-gradient(200deg, " + bgColor['s'] + "," + bgColor['e'] + ")";
+			},
+			//初始化歌曲时间
+			initPage() {
+				let song = this.song;
+				song.addEventListener('canplaythrough',()=> {
+					this.songLongT = parseInt(song.duration);
+					this.initSongT(this.songLongT);
+				});
+			},
+			//time 歌曲时间 
+			initSongT(time) {
+				let min = parseInt(time / 60),
+					sec = time % 60;
+				this.songT = min + ":" + sec;
 			},
 			//上一首
 			pre() {
@@ -87,12 +111,15 @@
 			},
 			//播放暂停
 			opa() {
+				let song = this.song;
 				if(!this.playB) {//播放
 					this.playB = true;
 					this.playIcon = this.pause;
+					song.play();
 				} else {//暂停
 					this.playIcon = this.play;
 					this.playB = false;
+					song.pause();
 				}
 				Bus.$emit('playB',this.playB);
 
