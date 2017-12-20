@@ -1,5 +1,5 @@
 <template>
-	<div class="singImg" ref="singImgC">
+	<div class="singImg" ref="singImgC" @click="showImg">
 		<div class="singer bd_top">
 			<img src="../../common/img/bang.png" class="bang" :class="{'pause':!playb}">
 			<div class="pan" :class="{'pause':!playb}">
@@ -61,7 +61,11 @@
 					    self.$emit('changeBg',bgColor);
 					}
 				});
-			}
+			},
+			//点击图片  图片组件消失
+			showImg() {
+        		Bus.$emit('showimg',false);
+        	}
 		}
 	}
 </script>

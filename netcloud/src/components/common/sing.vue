@@ -16,13 +16,13 @@
 		<lyric :lyric-obj="lyricObj" v-show="!singImgShow"></lyric>
 		<div class="player" ref="player">
 			<div class="progress">
-				<div class="st">00:00</div>
+				<div class="st">{{songCurStr}}</div>
 				<div class="proBar">
-					<div class="curBar"></div>
+					<div class="curBar" ref="curBar"></div>
 					<div class="allBar"></div>
-					<div class="conBar"></div>
+					<div class="conBar" ref="conBar"></div>
 				</div>
-				<div class="at t_r">{{songT}}</div>
+				<div class="at t_r">{{songLongStr}}</div>
 			</div>
 			<div class="control">
 				<i class="icon iconfont cond">&#xe67b;</i>
@@ -55,15 +55,19 @@
 					conHeight:null,//组件高度
 					sing:null//歌词
 				},
-				singImgShow:true,
+				singImgShow:true,//是否显示歌曲图片
 				play:'&#xe684;',//播放icon
 				pause:'&#xe60b;',//暂停icon
 				playIcon:null,//界面按钮icon
 				playB:false,//播放状态
 				colorArr:[],//图片颜色反色数组 r g b
 				song:null,//歌曲DOM
+				songCurT:0,//歌曲当前时间 数字格式
+				songCurStr:'00:00',//歌曲当前时间 时分格式
 				songLongT:0,//歌曲时间 数字格式
-				songT:0//歌曲时间 时分格式
+				songLongStr:'00:00',//歌曲时间 时分格式
+				readyState:0,//歌曲缓冲状态
+				cache:0//歌曲缓冲进度
 			}
 		},
 		mounted() {
@@ -75,7 +79,16 @@
 			self.playIcon = self.play;
 			self.$nextTick(() => {
 				self.song = self.$refs.sion;
+				let song = self.$refs.sion;
 				self.initPage();
+				//实时监听歌曲当前播放时间
+				self.song.addEventListener('timeupdate',(e)=> {
+					this.countTime(e.target.currentTime)
+				});
+				Bus.$on('showimg',(status)=> {
+					this.singImgShow = status;
+				});
+				
 			});
 		},
 		methods: {
@@ -90,16 +103,33 @@
 			//初始化歌曲时间
 			initPage() {
 				let song = this.song;
+				//监听歌曲是否加载完成
 				song.addEventListener('canplaythrough',()=> {
+					this.readyState = song.readyState;
 					this.songLongT = parseInt(song.duration);
-					this.initSongT(this.songLongT);
+					this.initSongT(this.songLongT,'s');
 				});
 			},
 			//time 歌曲时间 
-			initSongT(time) {
+			//type 开始or结束
+			initSongT(time,type) {
 				let min = parseInt(time / 60),
 					sec = time % 60;
-				this.songT = min + ":" + sec;
+				min < 10 && (min = '0' + min);	
+				sec < 10 && (sec = '0' + sec);	
+				let	timeStr = min + ":" + sec;
+				type ? this.songLongStr = timeStr : this.songCurStr = timeStr;
+			},
+			//计算歌曲时间 改变进度条
+			//time 当前播放时间
+			countTime(time) {
+				this.songCurT = parseInt(time);
+				let songCurT = this.songCurT,
+					progress = songCurT * 100 / this.songLongT + '%';
+				this.$refs.curBar.style.width = progress;
+				this.$refs.conBar.style.left = progress;
+				this.initSongT(songCurT);
+				'100%' == progress && Bus.$emit('playB',false);
 			},
 			//上一首
 			pre() {
@@ -111,6 +141,11 @@
 			},
 			//播放暂停
 			opa() {
+				//this.readyState = 4 表示正确获取到歌曲
+				if(4 !=this.readyState ) {
+					alert('歌曲没准备好');
+					return 
+				}
 				let song = this.song;
 				if(!this.playB) {//播放
 					this.playB = true;
@@ -192,7 +227,7 @@
 						height:2px
 						top:4px
 					.curBar
-						width:50%
+						width:0
 						bg_color(#d33a31)
 						z-index:4
 					.allBar
@@ -207,7 +242,7 @@
 						bg_color(#fff);
 						z-index:5
 						top:-2px
-						left:50%
+						left:0
 			.control
 				display:flex
 				height:40px

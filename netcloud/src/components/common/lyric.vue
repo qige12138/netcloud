@@ -1,5 +1,5 @@
 <template>
-	<div class="lyric" ref="lyric">
+	<div class="lyric" ref="lyric" @click="showImg">
 		<div class="volume">
 			<i class="icon iconfont">&#xe607;</i>
 			<div class="vol">
@@ -7,6 +7,9 @@
 				<div class="allVol"></div>
 				<div class="conVol"></div>
 			</div>
+		</div>
+		<div class="lyricCon t_c">
+			假装有歌词
 		</div>
 	</div>
 </template>
@@ -19,6 +22,12 @@
         		this.$refs.lyric.style.height = this.lyricObj.conHeight + 'px';
         	})
             
+        },
+        methods:{
+        	//点击歌词  歌词组件消失
+        	showImg() {
+        		Bus.$emit('showimg',true)
+        	}
         }
 	}
 </script>
@@ -26,7 +35,8 @@
 <style lang="stylus" scoped>
 	@import '../../common/stylus/public.styl'
 	.lyric
-		color:#bbb;
+		color:#bbb
+		bg_color(transparent)
 		.volume
 			re()
 			width:100%
@@ -64,6 +74,8 @@
 					z-index:4
 					top:2px
 					left:50%
+		.lyricCon 
+			pt(10px)
 					
 				
 				
