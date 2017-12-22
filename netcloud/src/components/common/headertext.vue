@@ -1,7 +1,7 @@
 <template>
 	<div class="headertext">
 		<div class="head">
-			<div>
+			<div @click="back">
 				<i class="icon iconfont">&#xe617;</i>
 			</div>
 			<div>
@@ -19,7 +19,11 @@
 </template>
 <script>
 	export default {
-
+		methods:{
+			back() {
+				this.$router.go(-1);
+			}
+		}
 	}
 </script>
 

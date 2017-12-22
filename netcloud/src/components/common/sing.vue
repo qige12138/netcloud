@@ -1,7 +1,7 @@
 <template>
 	<div class="sing" ref="sing">
 		<div class="head">
-			<div>
+			<div @click="back">
 				<i class="icon iconfont">&#xe617;</i>
 			</div>
 			<div>
@@ -162,7 +162,11 @@
 			//上下一首
 			changeSong(index) {
 				'left' == index ? console.info('上一首') : console.info('下一首'); 
+			},
+			back() {
+				this.$router.go(-1);
 			}
+
 		}
 		
 	}

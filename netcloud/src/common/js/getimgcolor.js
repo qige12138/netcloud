@@ -1,4 +1,8 @@
-
+/**
+* 获取图片主次色
+* @param n window
+* @param t 母鸡啊
+*/
 !function(n, t) {
 	"use strict";
 	var e = function(n, t) {
