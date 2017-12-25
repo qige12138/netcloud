@@ -4,7 +4,7 @@
 			<img src="../../common/img/bang.png" class="bang" :class="{'pause':!playb}">
 			<div class="pan" :class="{'pause':!playb}">
 				<div>
-					<img src="../../common/img/rec2.jpg" ref="singImg">
+					<img src="../../common/img/rec3.jpg" ref="singImg">
 				</div>
 			</div>
 		</div>
