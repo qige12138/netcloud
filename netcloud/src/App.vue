@@ -7,6 +7,7 @@
 
 <script>
 import myHeader from './components/myheader/myheader'
+import {lay} from './common/js/public'
 
 export default {
 	name: 'app',
@@ -19,6 +20,7 @@ export default {
 		}
 	},
 	mounted() {
+		lay.toast()
 		this.changeHeader();
 	},
 	methods:{

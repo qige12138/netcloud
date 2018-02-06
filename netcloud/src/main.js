@@ -8,7 +8,8 @@ import router from './router'
 import fastclick from 'fastclick'
 import './common/stylus/index.styl'
 import VueSwiper from 'vue-awesome-swiper'
-import VueResource from 'vue-resource';
+import VueResource from 'vue-resource'
+
 
 Vue.use(VueSwiper)
 Vue.use(VueResource)
