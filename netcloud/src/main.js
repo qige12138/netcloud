@@ -9,10 +9,13 @@ import fastclick from 'fastclick'
 import './common/stylus/index.styl'
 import VueSwiper from 'vue-awesome-swiper'
 import VueResource from 'vue-resource'
+import axios from 'axios'
 
 
 Vue.use(VueSwiper)
 Vue.use(VueResource)
+
+Vue.prototype.axios = axios
 
 Vue.config.productionTip = false
 

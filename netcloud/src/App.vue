@@ -20,7 +20,7 @@ export default {
 		}
 	},
 	mounted() {
-		lay.toast()
+		this.login();
 		this.changeHeader();
 	},
 	methods:{
@@ -28,6 +28,11 @@ export default {
 			let rou = this.$route,
 				routerName = ['/volume','/music','/circle',"/video","/station"];
 			this.headerShow = -1 == routerName.indexOf(rou.path) ? false : true;
+		},
+		login() {
+			this.axios.get('http://localhost:3000/music/url?id=33894312&proxy=http://121.196.226.246:84')
+			.then(res=> console.info(res))
+			.catch(err => lay.dialog('密码错误'))
 		}
 	},
 	watch:{
