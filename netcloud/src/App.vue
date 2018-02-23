@@ -30,8 +30,12 @@ export default {
 			this.headerShow = -1 == routerName.indexOf(rou.path) ? false : true;
 		},
 		login() {
-			this.axios.get('http://localhost:3000/music/url?id=33894312&proxy=http://121.196.226.246:84')
-			.then(res=> console.info(res))
+			this.axios.get('http://localhost:3000/login/cellphone?phone=18782204615&password=wyy129833047')
+			.then(res=> {
+				if(200 == res.status) {
+					lay.toast('登录成功');
+				}
+			})
 			.catch(err => lay.dialog('密码错误'))
 		}
 	},
