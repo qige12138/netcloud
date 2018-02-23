@@ -21,6 +21,7 @@ export default {
 	},
 	mounted() {
 		this.login();
+		let a = ''; 
 		this.changeHeader();
 	},
 	methods:{
