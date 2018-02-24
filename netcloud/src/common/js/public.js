@@ -2,13 +2,13 @@ import {laye} from './layer.js'
 
 
 
-export const lay = {
+export const net = {
 	/**
     * 提示
     * @param t String 提示语
     */
 	toast : function(t) {
-        laye.open({
+        layer.open({
             content: t || '提示',
             skin: 'msg',
             time: 2//2秒后自动关闭
@@ -36,8 +36,31 @@ export const lay = {
     dialog : function(cont,t) {
         layer.open({
             content: cont || '',
-            btn: t || '我知道了'
+            btn: t || '好的'
         });
+    },
+    /**
+    * 关闭所有弹窗
+    */
+    closeAll: function() {
+        layer.closeAll();
+    },
+    /**
+    * 创建本地缓存
+    * @param name String k
+    * @param val Object value
+    */
+    setStorage : function(name,val) {
+        localStorage.setItem(name,JSON.stringify(val))
+    },
+    /**
+    * 获取本地缓存
+    * @param name String k
+    * @return {val}
+    */
+    getStorage : function(name) {
+        return JSON.parse(localStorage.getItem(name))
     }
+
 }
 

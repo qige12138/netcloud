@@ -9,7 +9,7 @@
 <script>
 import myHeader from './components/myheader/myheader'
 import Login from './components/common/login'
-import {lay} from './common/js/public'
+import store from '@/common/js/store'
 
 export default {
 	name: 'app',
@@ -17,6 +17,7 @@ export default {
 	  myHeader,
 	  Login
 	},
+	store,
 	data() {
 		return {
 			headerShow:true,

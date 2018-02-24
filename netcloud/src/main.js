@@ -10,6 +10,7 @@ import './common/stylus/index.styl'
 import VueSwiper from 'vue-awesome-swiper'
 import VueResource from 'vue-resource'
 import axios from 'axios'
+import Store from './common/js/store'
 
 
 Vue.use(VueSwiper)
@@ -23,6 +24,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  Store,
   template: '<App/>',
   components: { App }
 });
