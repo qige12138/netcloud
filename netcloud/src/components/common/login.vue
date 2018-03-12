@@ -16,13 +16,17 @@
 		<div class="loginBtn t_c" :class="{'po_no':po}">
 			<button @click="loginBtn()">{{btnT}}</button>
 		</div>
-		<p>{{$store.state.count}}</p>
+		<div>
+			<p>{{count}}</p>
+			<button @click="add(10)">+</button>
+		</div>
 		
 	</div>
 </template>
 <script>
 	import {net} from '@/common/js/public'
 	import store from '@/common/js/store'
+	import {mapState, mapMutations} from "vuex"
 	export default {
 		data() {
 			return {
@@ -34,22 +38,27 @@
 			}
 		},
 		store,
+		computed:mapState(['count']),
 		methods:{
+			mapMutations([
+				'add','reduce'
+			]),
 			loginBtn() {
-				let phone = this.phone,
-					password = this.password;
-				if(!phone) {
-					net.toast('请输入手机号');
-				} else if(!this.testPhone(phone)) {
-					net.toast('手机号格式错误');
-				} else if(!password) {
-					net.toast('请输入密码');
-				} else {
-					this.btnT = '登陆中...';
-					this.po = true;
-					net.load(' ');
-					this.login();
-				}
+				this.$store.commit('add',10)
+				// let phone = this.phone,
+				// 	password = this.password;
+				// if(!phone) {
+				// 	net.toast('请输入手机号');
+				// } else if(!this.testPhone(phone)) {
+				// 	net.toast('手机号格式错误');
+				// } else if(!password) {
+				// 	net.toast('请输入密码');
+				// } else {
+				// 	this.btnT = '登录中...';
+				// 	this.po = true;
+				// 	net.load(' ');
+				// 	this.login();
+				// }
 			},
 			/**
 			* 登录
@@ -74,6 +83,7 @@
 				})
 				.catch(err => {
 					net.closeAll();
+					this.btnT = '登录';
 					net.dialog('密码错误');
 				});
 			},

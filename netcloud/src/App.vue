@@ -1,16 +1,17 @@
 <template>
   <div id="app" class="over">
   	<my-header v-show="headerShow"></my-header>
+  	<p>{{$store.state.count}}</p>
     <router-view></router-view>
     <login v-show="login"></login>	
+
   </div>
 </template>
 
 <script>
 import myHeader from './components/myheader/myheader'
 import Login from './components/common/login'
-import store from '@/common/js/store'
-
+import store from './common/js/store'
 export default {
 	name: 'app',
 	components: {
@@ -25,6 +26,7 @@ export default {
 		}
 	},
 	mounted() {
+
 		this.changeHeader();
 	},
 	methods:{
