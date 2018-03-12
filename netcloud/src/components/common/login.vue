@@ -40,9 +40,9 @@
 		store,
 		computed:mapState(['count']),
 		methods:{
-			mapMutations([
-				'add','reduce'
-			]),
+			// mapMutations([
+			// 	'add','reduce'
+			// ]),
 			loginBtn() {
 				this.$store.commit('add',10)
 				// let phone = this.phone,
