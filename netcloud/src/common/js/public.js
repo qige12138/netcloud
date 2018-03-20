@@ -60,7 +60,38 @@ export const net = {
     */
     getStorage : function(name) {
         return JSON.parse(localStorage.getItem(name))
+    },
+    /**
+    * 清除本地缓存
+    * @param name String k
+    */
+    rmStorage: function(name) {
+        name = name || '';
+        localStorage.removeItem(name);
+    },
+    /**
+    * 验证手机号
+    * @param num Number 手机号码
+    * return boolean
+    */
+    testPhone: function(num) {
+        let reg = /^1[3|4|5|7|8][0-9]\d{4,8}$/;
+        return reg.test(num)
+    },
+     /**
+    * 获取用户信息
+    */
+    msg:function() {
+        return this.getStorage('msg')
+    },
+     /**
+    * 获取用户uid
+    */
+    uid: function() {
+        var msg = this.getStorage('msg');
+        return msg['account']['id']
     }
+
 
 }
 

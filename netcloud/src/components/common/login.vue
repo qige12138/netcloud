@@ -1,5 +1,5 @@
 <template>
-	<div class="login" :class="{'t_100':status}">
+	<div class="login" :class="{'t_100':!lStatus}">
 		<div class="t_c logo">
 			<img src="../../common/img/logo.jpg">
 		</div>
@@ -16,17 +16,11 @@
 		<div class="loginBtn t_c" :class="{'po_no':po}">
 			<button @click="loginBtn()">{{btnT}}</button>
 		</div>
-		<div>
-			<p>{{count}}</p>
-			<button @click="add(10)">+</button>
-		</div>
 		
 	</div>
 </template>
 <script>
-	import {net} from '@/common/js/public'
-	import store from '@/common/js/store'
-	import {mapState, mapMutations} from "vuex"
+	import {mapState,mapActions} from "vuex"
 	export default {
 		data() {
 			return {
@@ -34,31 +28,33 @@
 				password:null,
 				btnT:'登录',
 				status:false,
-				po:false
+				po:false,
 			}
 		},
-		store,
-		computed:mapState(['count']),
+		mounted() {
+		},
+		computed:{
+			...mapState(['lStatus'])
+		},
 		methods:{
-			// mapMutations([
-			// 	'add','reduce'
-			// ]),
+			...mapActions({
+				'assign':'assign'
+			}),
 			loginBtn() {
-				this.$store.commit('add',10)
-				// let phone = this.phone,
-				// 	password = this.password;
-				// if(!phone) {
-				// 	net.toast('请输入手机号');
-				// } else if(!this.testPhone(phone)) {
-				// 	net.toast('手机号格式错误');
-				// } else if(!password) {
-				// 	net.toast('请输入密码');
-				// } else {
-				// 	this.btnT = '登录中...';
-				// 	this.po = true;
-				// 	net.load(' ');
-				// 	this.login();
-				// }
+				let phone = this.phone,
+					password = this.password;
+				if(!phone) {
+					this.net.toast('请输入手机号');
+				} else if(!this.net.testPhone(phone)) {
+					this.net.toast('手机号格式错误');
+				} else if(!password) {
+					this.net.toast('请输入密码');
+				} else {
+					this.btnT = '登录中...';
+					this.po = true;
+					this.net.load(' ');
+					this.login();
+				}
 			},
 			/**
 			* 登录
@@ -70,32 +66,26 @@
 						'password':this.password
 					}
 				})
-				.then(res=> {
+				.then(res => {
 					if(200 == res.status) {
-						net.toast('登录成功');
+						this.net.toast('登录成功');
 						//将当前帐号密码保存到本地缓存
-						net.setStorage('user',{phone:this.phone,password:this.password});
+						this.net.setStorage('user',{phone:this.phone,password:this.password});
+						this.net.setStorage('msg',res['data']);
 						setTimeout(() => {
-							this.status = true;
-							net.closeAll();
+							this.assign({s:false})
+							this.net.closeAll();
 						},500);
 					}
 				})
 				.catch(err => {
-					net.closeAll();
+					this.net.closeAll();
 					this.btnT = '登录';
-					net.dialog('密码错误');
+					this.po = false;
+					this.net.dialog('密码错误');
 				});
-			},
-			/**
-			* 验证手机号
-			* @param num Number 手机号码
-			* return boolean
-			*/
-			testPhone(num) {
-				let reg = /^1[3|4|5|7|8][0-9]\d{4,8}$/;
-				return reg.test(num)
 			}
+			
 		}
 	}
 </script>
@@ -110,7 +100,7 @@
 		left:0
 		z-index:100
 		bg_color(#fff)
-		transition:.3s all linear
+		transition:.5s all linear
 		&.t_100 
 			top:-100%
 		.logo

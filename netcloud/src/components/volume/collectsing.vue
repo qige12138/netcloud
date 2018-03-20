@@ -2,54 +2,17 @@
 	<div class="collectsing">
 		<div class="creat">
 			<i class="icon iconfont down  t_c" :class="{'rota':!down_0}"  @click="view(0)">&#xe64b;</i><span
-			  @click="view(0)">创建的歌单</span><i
+			  @click="view(0)">{{userName}}的歌单</span><i
 			class="icon iconfont set t_r" ref="set">&#xe600;</i>
 		</div>
 		<div class="creatSing" v-show="down_0">
-			<div>
+			<div v-for="song in songList">
 				<router-link tag="div" to="" class="singImg" @click.native="golist()">
-					<img src="../../common/img/timg.jpg">
+					<img :src="song['coverImgUrl']">
 				</router-link><router-link
 				 tag="div" to="" class="singName bd_bottom" @click.native="golist()">
-					<p>我喜欢的音乐</p>
-					<p>99首</p>
-				</router-link><i
-				 class="icon iconfont t_c bd_bottom">&#xe60e;</i>
-			</div>
-			<div>
-				<router-link tag="div" to="" class="singImg" @click.native="golist()">
-					<img src="../../common/img/timp1.jpg">
-				</router-link><router-link
-				 tag="div" to="" class="singName bd_bottom" @click.native="golist()">
-					<p>哼哼</p>
-					<p>10首</p>
-				</router-link><i
-				 class="icon iconfont t_c bd_bottom">&#xe60e;</i>
-			</div>
-		</div>
-		<div class="creat">
-			<i class="icon iconfont down  t_c" :class="{'rota':!down_1}"  @click="view(1)">&#xe64b;</i><span
-			  @click="view(1)">收藏的歌单</span><i
-			class="icon iconfont set t_r" ref="set">&#xe600;</i>
-		</div>
-		<div class="creatSing" v-show="down_1">
-			<div>
-				<router-link tag="div" to="" @click.native="golist()" class="singImg">
-					<img src="../../common/img/timg.jpg">
-				</router-link><router-link
-				 tag="div" to="" @click.native="golist()" class="singName bd_bottom">
-					<p>收藏的音乐</p>
-					<p>99首</p>
-				</router-link><i
-				 class="icon iconfont t_c bd_bottom">&#xe60e;</i>
-			</div>
-			<div>
-				<router-link tag="div" to="" @click.native="golist()" class="singImg">
-					<img src="../../common/img/timp1.jpg">
-				</router-link><router-link
-				 tag="div" to="" @click.native="golist()" class="singName bd_bottom">
-					<p>收藏的音乐</p>
-					<p>10首</p>
+					<p>{{song['name']}}</p>
+					<p>{{song['trackCount']}}&nbsp;by&nbsp;<span>{{song['creator']['nickname']}}</span></p>
 				</router-link><i
 				 class="icon iconfont t_c bd_bottom">&#xe60e;</i>
 			</div>
@@ -58,15 +21,24 @@
 </template>
 
 <script>
+	import {mapState,mapActions} from "vuex"
 	export default {
 		data() {
 			return {
 				down_0:true,
 				down_1:true,
-				msg:'listMsg'
+				msg:'listMsg',
+				userName:this.net.msg().profile.nickname,
+				songList:null
 			}
 		},
+		computed:{
+			...mapState(['lStatus'])
+		},
 		mounted() {
+			if(!this.lStatus) return
+			console.info(this.userName)
+			this.getSubcount();
 		},
 		methods:{
 			view(e) {
@@ -78,6 +50,20 @@
 				this.$router.push({
 					path:'/list'
 				})
+			},
+			getSubcount() {
+				this.axios.get('http://localhost:3000/user/playlist',{
+					params:{
+						uid:this.net.uid()
+					}
+				})
+				.then(res => {
+					if(200 == res.status) {
+						this.songList = res.data.playlist;
+					}
+				})
+				.catch(err => {
+				});
 			}
 
 		}
@@ -125,6 +111,7 @@
 				vertical-align: middle
 				p:nth-child(1)
 					line-height:28px
+					overflow_t()
 				p:nth-child(2)
 					color:$color_66
 					font-size:$fonts_10
