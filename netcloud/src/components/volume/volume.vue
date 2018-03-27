@@ -2,18 +2,6 @@
 	<div class="volume">
 		<div class="volumeConent">
 			<router-link tag="div" to="" class="volumeTab">
-				<i class="icon iconfont tabI t_c">&#xe680;</i><span
-				class="tabName bd_bottom">本地音乐<span class="num">(0)</span></span>
-			</router-link>	
-			<router-link tag="div" to="" class="volumeTab">
-				<i class="icon iconfont tabI t_c">&#xe629;</i><span
-				class="tabName bd_bottom">最近播放<span class="num">(0)</span></span>
-			</router-link>
-			<router-link tag="div" to="" class="volumeTab">
-				<i class="icon iconfont tabI t_c">&#xe62d;</i><span
-				class="tabName bd_bottom">下载管理<span class="num">(0)</span></span>
-			</router-link>
-			<router-link tag="div" to="" class="volumeTab">
 				<i class="icon iconfont tabI t_c" >&#xe65e;</i><span
 				class="tabName bd_bottom">我的电台<span class="num">(0)</span></span>
 			</router-link>
@@ -22,7 +10,7 @@
 				class="tabName bd_bottom">我的收藏<span class="num">(0)</span></span>
 			</router-link>
 		</div>
-		<collect-sing v-on:headerMsg="recieveColl"></collect-sing>
+		<collect-sing></collect-sing>
 	</div>
 </template>
 <script>
@@ -36,9 +24,7 @@
 			}
 		},
 		methods:{
-			recieveColl(text) {
-				this.$emit('rouerMsg',text);
-			}
+
 
 		}
 

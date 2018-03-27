@@ -37,7 +37,6 @@
 		},
 		mounted() {
 			if(!this.lStatus) return
-			console.info(this.userName)
 			this.getSubcount();
 		},
 		methods:{

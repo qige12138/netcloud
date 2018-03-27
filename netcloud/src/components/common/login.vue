@@ -1,5 +1,5 @@
 <template>
-	<div class="login" :class="{'t_100':!lStatus}">
+	<div class="login">
 		<div class="t_c logo">
 			<img src="../../common/img/logo.jpg">
 		</div>
@@ -100,9 +100,6 @@
 		left:0
 		z-index:100
 		bg_color(#fff)
-		transition:.5s all linear
-		&.t_100 
-			top:-100%
 		.logo
 			pad_(20%,0)
 			img
