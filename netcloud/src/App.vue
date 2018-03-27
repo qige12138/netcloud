@@ -25,12 +25,13 @@ export default {
 		}
 	},
 	mounted() {
-		// if(this.net.getStorage('user')) {
-		// 	this.assign({s:false});
-		// } else {
-		// 	this.assign({s:true});
-		// 	this.net.rmStorage();
-		// }
+		if(this.net.getStorage('user')) {
+			this.$bus.emit('login');
+			this.assign({s:false});
+		} else {
+			this.assign({s:true});
+			this.net.rmStorage();
+		}
 
 		this.changeHeader();
 	},

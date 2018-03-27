@@ -12,10 +12,12 @@ import VueResource from 'vue-resource'
 import axios from 'axios'
 import store from './common/js'
 import {net} from './common/js/public'
+import VueBus from 'vue-bus'
 
 
 Vue.use(VueSwiper)
 Vue.use(VueResource)
+Vue.use(VueBus)
 
 Vue.prototype.axios = axios
 Vue.prototype.net = net

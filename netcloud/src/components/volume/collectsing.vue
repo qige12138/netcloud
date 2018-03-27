@@ -6,16 +6,19 @@
 			class="icon iconfont set t_r" ref="set">&#xe600;</i>
 		</div>
 		<div class="creatSing" v-show="down_0">
-			<div v-for="song in songList">
-				<router-link tag="div" to="" class="singImg" @click.native="golist()">
-					<img :src="song['coverImgUrl']">
-				</router-link><router-link
-				 tag="div" to="" class="singName bd_bottom" @click.native="golist()">
-					<p>{{song['name']}}</p>
-					<p>{{song['trackCount']}}&nbsp;by&nbsp;<span>{{song['creator']['nickname']}}</span></p>
-				</router-link><i
-				 class="icon iconfont t_c bd_bottom">&#xe60e;</i>
+			<div  v-if="songList.length">
+				<div v-for="song in songList">
+					<router-link tag="div" to="" class="singImg" @click.native="golist()">
+						<img :src="song['coverImgUrl']">
+					</router-link><router-link
+					 tag="div" to="" class="singName bd_bottom" @click.native="golist()">
+						<p>{{song['name']}}</p>
+						<p>{{song['trackCount']}}&nbsp;by&nbsp;<span>{{song['creator']['nickname']}}</span></p>
+					</router-link><i
+					 class="icon iconfont t_c bd_bottom">&#xe60e;</i>
+				</div>
 			</div>
+			
 		</div>
 	</div>
 </template>
@@ -26,17 +29,20 @@
 		data() {
 			return {
 				down_0:true,
-				down_1:true,
 				msg:'listMsg',
-				userName:this.net.msg().profile.nickname,
-				songList:null
+				userName:null,
+				songList:[]
 			}
 		},
 		computed:{
 			...mapState(['lStatus'])
 		},
-		mounted() {
-			if(!this.lStatus) return
+		created() {
+			this.$bus.on('login',()=> {
+				this.userName = this.net.msg().profile.nickname;
+				this.getSubcount();
+			});
+			this.userName = this.net.msg().profile.nickname;
 			this.getSubcount();
 		},
 		methods:{

@@ -5,10 +5,6 @@
 				<i class="icon iconfont tabI t_c" >&#xe65e;</i><span
 				class="tabName bd_bottom">我的电台<span class="num">(0)</span></span>
 			</router-link>
-			<router-link tag="div" to="" class="volumeTab">
-				<i class="icon iconfont tabI t_c">&#xe620;</i><span
-				class="tabName bd_bottom">我的收藏<span class="num">(0)</span></span>
-			</router-link>
 		</div>
 		<collect-sing></collect-sing>
 	</div>
