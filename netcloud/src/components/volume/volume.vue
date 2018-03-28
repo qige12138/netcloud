@@ -3,7 +3,7 @@
 		<div class="volumeConent">
 			<router-link tag="div" to="" class="volumeTab">
 				<i class="icon iconfont tabI t_c" >&#xe65e;</i><span
-				class="tabName bd_bottom">我的电台<span class="num">(0)</span></span>
+				class="tabName bd_bottom">我的电台<span class="num">({{count}})</span></span>
 			</router-link>
 		</div>
 		<collect-sing></collect-sing>
@@ -17,10 +17,25 @@
 		},
 		data() {
 			return {
+				count:0
 			}
 		},
+		mounted() {
+			this.$bus.on('login',()=> {
+				this.getDj();
+			});
+			this.getDj();
+		},
 		methods:{
-
+			getDj() {
+				this.ajax.get('user/dj',{
+					uid:this.net.uid()
+				})
+				.then(res=> {
+					if(!res) return
+					this.count = res.count;
+				});
+			}
 
 		}
 

@@ -28,7 +28,7 @@
 				password:null,
 				btnT:'登录',
 				status:false,
-				po:false,
+				po:false
 			}
 		},
 		mounted() {
@@ -50,9 +50,6 @@
 				} else if(!password) {
 					this.net.toast('请输入密码');
 				} else {
-					this.btnT = '登录中...';
-					this.po = true;
-					this.net.load(' ');
 					this.login();
 				}
 			},
@@ -60,30 +57,30 @@
 			* 登录
 			*/
 			login() {
-				this.axios.get('http://localhost:3000/login/cellphone',{
-					params:{
+				this.ajax.get('login/cellphone',
+					{
 						'phone':this.phone,
-						'password':this.password
-					}
-				})
+						'password':this.password}
+				)
 				.then(res => {
-					if(200 == res.status) {
+					console.info(res)
+					if(!res) return
 						this.net.toast('登录成功');
 						//将当前帐号密码保存到本地缓存
 						this.net.setStorage('user',{phone:this.phone,password:this.password});
-						this.net.setStorage('msg',res['data']);
+						this.net.setStorage('msg',res);
 						setTimeout(() => {
 							this.assign({s:false})
 							this.net.closeAll();
+							this.$router.push({path:'./volume'});
+							this.$bus.emit('login');
+							this.assign({s:false});
 						},500);
-					}
+
 				})
 				.catch(err => {
-					this.net.closeAll();
-					this.btnT = '登录';
-					this.po = false;
 					this.net.dialog('密码错误');
-				});
+				})
 			}
 			
 		}

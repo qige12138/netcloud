@@ -42,7 +42,6 @@
 				this.userName = this.net.msg().profile.nickname;
 				this.getSubcount();
 			});
-			this.userName = this.net.msg().profile.nickname;
 			this.getSubcount();
 		},
 		methods:{
@@ -57,15 +56,12 @@
 				})
 			},
 			getSubcount() {
-				this.axios.get('http://localhost:3000/user/playlist',{
-					params:{
-						uid:this.net.uid()
-					}
+				this.ajax.get('user/playlist',{
+					uid:this.net.uid()
 				})
 				.then(res => {
-					if(200 == res.status) {
-						this.songList = res.data.playlist;
-					}
+					if(!res) return
+					this.songList = res.playlist;
 				})
 				.catch(err => {
 				});
