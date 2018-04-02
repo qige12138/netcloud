@@ -16,7 +16,9 @@
 			listMsg,
 			listSong
 		},
+		props:['songId'],
 		created(){
+			console.info(this.songId)
 			this.$nextTick(() => {
 				Bus.$emit('headerMsg');
 			});
