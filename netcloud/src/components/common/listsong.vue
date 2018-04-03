@@ -3,7 +3,7 @@
 		<div class="listTitle bd_bottom">
 			<div>
 				<i class="icon iconfont">&#xe627;</i>
-				<span>播放全部<span class="num">(共35首)</span></span>
+				<span>播放全部<span class="num">(共{{songlist.length}}首)</span></span>
 			</div>
 			<div class="t_r">
 				<i class="icon iconfont">&#xe699;</i>
@@ -11,70 +11,14 @@
 			</div>
 		</div>
 		<div class="listContent">
-			<div class="list ">
+			<div class="list" v-for="(song,index) in songlist">
 				<div class="ser">
-					1
-				</div>
-				<div class="bd_bottom singMsg">
-					<div  @click="goSong()">
-						<p>红玫瑰</p>
-						<p>陈奕迅-红玫瑰</p>
-					</div>
-					<div>
-						<i class="icon iconfont">&#xe60e;</i>
-					</div>
-				</div>
-			</div>
-			<div class="list ">
-				<div class="ser">
-					1
-				</div>
-				<div class="bd_bottom singMsg">
-					<div@click="goSong()">
-						<p>红玫瑰</p>
-						<p>陈奕迅-红玫瑰</p>
-					</div>
-					<div>
-						<i class="icon iconfont">&#xe60e;</i>
-					</div>
-				</div>
-			</div>
-			<div class="list ">
-				<div class="ser">
-					1
+					{{index + 1}}
 				</div>
 				<div class="bd_bottom singMsg">
 					<div>
-						<p>红玫瑰</p>
-						<p>陈奕迅-红玫瑰</p>
-					</div>
-					<div>
-						<i class="icon iconfont">&#xe60e;</i>
-					</div>
-				</div>
-			</div>
-			<div class="list ">
-				<div class="ser">
-					1
-				</div>
-				<div class="bd_bottom singMsg">
-					<div>
-						<p>红玫瑰</p>
-						<p>陈奕迅-红玫瑰</p>
-					</div>
-					<div>
-						<i class="icon iconfont">&#xe60e;</i>
-					</div>
-				</div>
-			</div>
-			<div class="list ">
-				<div class="ser">
-					1
-				</div>
-				<div class="bd_bottom singMsg">
-					<div>
-						<p>红玫瑰</p>
-						<p>陈奕迅-红玫瑰</p>
+						<p>{{song['name']}}</p>
+						<p>{{song['artists'][0]['name']}}-{{song['album']['name']}}</p>
 					</div>
 					<div>
 						<i class="icon iconfont">&#xe60e;</i>
@@ -86,10 +30,10 @@
 </template>
 <script>
 	export default {
+		props:['songlist'],
+		mounted() {
+		},
 		methods:{
-			goSong() {
-				this.$emit('goSong')
-			}
 		}
 	}
 </script>

@@ -7,11 +7,11 @@
 		</div>
 		<div class="creatSing" v-show="down_0">
 			<div  v-if="songList.length">
-				<div v-for="song in songList">
-					<div class="singImg" :songId="song['id']" @click="golist($event)">
+				<div v-for="song in songList" :key="song['id']">
+					<div class="singImg" :songId="song['id']" @click="golist(song.id)">
 						<img :src="song['coverImgUrl']">
 					</div><div
-					  :songId="song['id']"  class="singName bd_bottom" @click="golist($event)">
+					  :songId="song['id']"  class="singName bd_bottom" @click="golist(song.id)">
 						<p>{{song['name']}}</p>
 						<p>{{song['trackCount']}}&nbsp;by&nbsp;<span>{{song['creator']['nickname']}}</span></p>
 					</div><i
@@ -49,11 +49,23 @@
 				let downC = this[down];
 				this[down] = downC ? false : true;
 			},
-			golist(e) {
-				console.info(e.target)
-				// this.$router.push({
-				// 	path:'/list'
-				// })
+			/**
+			* 跳转歌单详情
+			* @params id 歌单id
+			*/
+			golist(id) {
+				this.net.load();
+				this.ajax.get('/playlist/detail',{
+					id:id
+				})
+				.then(res=> {
+					this.net.closeAll();
+					this.$router.push({
+						path:'/list',
+						query:res.result
+					})
+				})
+				
 			},
 			getSubcount() {
 				this.ajax.get('user/playlist',{

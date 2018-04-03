@@ -1,8 +1,8 @@
 <template>
 	<div class="list">
 		<header-text></header-text>	
-		<list-msg></list-msg>
-		<list-song v-on:goSong="goSing"></list-song>
+		<list-msg :headData="data"></list-msg>
+		<list-song :songlist="data.tracks"></list-song>
 	</div>
 </template>
 <script>
@@ -16,26 +16,21 @@
 			listMsg,
 			listSong
 		},
-		props:['songId'],
+		data(){
+			return {
+				data:this.$route.query,
+				headData:{}
+			}
+		},
+		mounted() {
+			
+		},
 		created(){
-			console.info(this.songId)
 			this.$nextTick(() => {
 				Bus.$emit('headerMsg');
 			});
 		},
 		methods:{
-			goSing() {
-				this.$router.push({
-					path:'/sing'
-				})
-			}
 		}
 	}
 </script>
-
-<style lang="stylus" scoped>
-	@import '../../common/stylus/public.styl'
-	
-		
-
-</style>

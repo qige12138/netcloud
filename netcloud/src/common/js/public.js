@@ -7,7 +7,7 @@ export const net = {
     * 提示
     * @param t String 提示语
     */
-	toast : function(t) {
+	toast(t) {
         layer.open({
             content: t || '提示',
             skin: 'msg',
@@ -19,7 +19,7 @@ export const net = {
     * @param t String 提示语
     * @param shadeClose 点击是否关闭提示框
     */
-    load : function(t,shadeClose) {
+    load(t,shadeClose) {
         shadeClose = shadeClose ? true : false;
         layer.open({
             type: 2,
@@ -33,7 +33,7 @@ export const net = {
     * @param cont String 提示语
     * @param t String 按钮文字
     */
-    dialog : function(cont,t) {
+    dialog(cont,t) {
         layer.open({
             content: cont || '',
             btn: t || '好的'
@@ -42,7 +42,7 @@ export const net = {
     /**
     * 关闭所有弹窗
     */
-    closeAll: function() {
+    closeAll() {
         layer.closeAll();
     },
     /**
@@ -50,7 +50,7 @@ export const net = {
     * @param name String k
     * @param val Object value
     */
-    setStorage : function(name,val) {
+    setStorage(name,val) {
         localStorage.setItem(name,JSON.stringify(val))
     },
     /**
@@ -58,14 +58,14 @@ export const net = {
     * @param name String k
     * @return {val}
     */
-    getStorage : function(name) {
+    getStorage(name) {
         return JSON.parse(localStorage.getItem(name))
     },
     /**
     * 清除本地缓存
     * @param name String k
     */
-    rmStorage: function(name) {
+    rmStorage(name) {
         name = name || '';
         localStorage.removeItem(name);
     },
@@ -74,22 +74,30 @@ export const net = {
     * @param num Number 手机号码
     * return boolean
     */
-    testPhone: function(num) {
+    testPhone(num) {
         let reg = /^1[3|4|5|7|8][0-9]\d{4,8}$/;
         return reg.test(num)
     },
      /**
     * 获取用户信息
     */
-    msg:function() {
+    msg() {
         return this.getStorage('msg')
     },
      /**
     * 获取用户uid
     */
-    uid: function() {
+    uid() {
         var msg = this.getStorage('msg');
         return msg['account']['id']
+    },
+    /**
+    * 数字超过一万用万表示
+    * @param num number
+    */
+    formatNum(num) {
+        var numT = '';
+        return num > 10000 ? ((num / 10000).toFixed(1) + '万') : num
     }
 
 

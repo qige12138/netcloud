@@ -2,22 +2,22 @@
 	<div class="listmsg">
 		<div class="msgHeader">
 			<div class="imgMsg">
-				<img src="/static/img/timg.60690e1.jpg">
+				<img :src="headData.coverImgUrl" onerror="this.src='/static/img/timg.60690e1.jpg'">
 				<i class="icon iconfont">&#xe613;</i>
 				<div>
 					<i class="icon iconfont">&#xe681;</i>
-					<span>151万</span>
+					<span>{{net.formatNum(headData.playCount) || 0}}</span>
 				</div>
 				
 			</div>
 			<div class="msg">
-				<p>我不要天上的星星，我要尘世的幸福</p>
+				<p>{{headData.name||''}}</p>
 				<div>
 					<div>
-						<img src="/static/img/timg.60690e1.jpg">
+						<img :src="headData.creator.avatarUrl" onerror="this.src='/static/img/timg.60690e1.jpg'">
 						<i class="icon iconfont">&#xe602;</i>
 					</div>
-					<span>小仙<i class="icon iconfont">&#xe637;</i></span>
+					<span>{{headData.creator.nickname || ''}}<i class="icon iconfont">&#xe637;</i></span>
 					
 				</div>
 			</div>
@@ -25,15 +25,15 @@
 		<div class="msgData t_c">
 			<div>
 				<i class="icon iconfont">&#xe7a3;</i>
-				<p>8178</p>
+				<p>{{net.formatNum(headData.subscribedCount) || '收藏'}}</p>
 			</div>
 			<div>
 				<i class="icon iconfont">&#xe6a7;</i>
-				<p>8178</p>
+				<p>{{net.formatNum(headData.commentCount) || '评论'}}</p>
 			</div>
 			<div>
 				<i class="icon iconfont">&#xe638;</i>
-				<p>8178</p>
+				<p>{{net.formatNum(headData.shareCount) || '分享'}}</p>
 			</div>
 			<div>
 				<i class="icon iconfont">&#xe64c;</i>
@@ -44,7 +44,9 @@
 </template>
 <script>
 	export default {
-
+		props:['headData'],
+		mounted() {
+		}
 	}
 </script>
 

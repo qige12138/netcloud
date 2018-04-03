@@ -6,7 +6,6 @@
 			</div>
 			<div>
 				<p>歌单</p>
-				<p>编辑推荐：我们彼此相爱，就是为民除害</p>
 			</div>
 			<div class="t_r">
 				<i class="icon iconfont">&#xe621;</i>
@@ -49,12 +48,7 @@
 				flex:5
 				overflow_h()
 				p:nth-child(1)
-					pt(6px)
-					lh(26px)
-				p:nth-child(2)
-					font_s(8px)
-					overflow_t()
-					color:#919084
+					lh(48px)
 			&>div:nth-child(3)
 				bs()
 				pr(10px)
