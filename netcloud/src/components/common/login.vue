@@ -59,22 +59,21 @@
 			login() {
 				this.ajax.get('login/cellphone',
 					{
-						'phone':this.phone,
-						'password':this.password}
+						phone:this.phone,
+						password:this.password,
+						load:' '
+					}
 				)
 				.then(res => {
-					console.info(res)
 					if(!res) return
 						this.net.toast('登录成功');
 						//将当前帐号密码保存到本地缓存
 						this.net.setStorage('user',{phone:this.phone,password:this.password});
 						this.net.setStorage('msg',res);
 						setTimeout(() => {
-							this.assign({s:false})
-							this.net.closeAll();
+							this.assign({s:false});
 							this.$router.push({path:'./volume'});
 							this.$bus.emit('login');
-							this.assign({s:false});
 						},500);
 
 				})

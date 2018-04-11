@@ -15,7 +15,7 @@
 				<div class="ser">
 					{{index + 1}}
 				</div>
-				<div class="bd_bottom singMsg">
+				<div class="bd_bottom singMsg" @click="play(song.id)">
 					<div>
 						<p>{{song['name']}}</p>
 						<p>{{song['artists'][0]['name']}}-{{song['album']['name']}}</p>
@@ -34,6 +34,15 @@
 		mounted() {
 		},
 		methods:{
+			//播放歌曲 id 歌曲ID
+			play(id) {
+				this.$router.push({
+					path:'/sing',
+					query:{
+						id:id
+					}
+				});
+			}
 		}
 	}
 </script>

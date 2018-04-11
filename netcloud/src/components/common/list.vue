@@ -18,12 +18,11 @@
 		},
 		data(){
 			return {
-				data:this.$route.query,
+				data:JSON.parse(this.$route.query.ret),
 				headData:{}
 			}
 		},
 		mounted() {
-			
 		},
 		created(){
 			this.$nextTick(() => {

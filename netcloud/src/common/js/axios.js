@@ -9,6 +9,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 
 let ajax = {
 	get(url,data) {
+		data['load'] && net.load(data['load']);
 		return axios.get(url,{params:data})
 	},
 	post(url,data) {
@@ -26,6 +27,8 @@ axios.interceptors.response.use(res => {
 	switch(code) {
 		case 200: // 成功
 			return res.data;
+		case 400: // 参数错误
+			break;
 		default:
 			net.dialog(res.data.msg)
 			return null

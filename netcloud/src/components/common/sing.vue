@@ -1,95 +1,40 @@
 <template>
 	<div class="sing" ref="sing">
-		<div class="head">
-			<div @click="back">
-				<i class="icon iconfont">&#xe617;</i>
-			</div>
-			<div>
-				<p>歌单</p>
-				<p>编辑推荐：我们彼此相爱，就是为民除害</p>
-			</div>
-			<div class="t_r">
-				<i class="icon iconfont">&#xe638;</i>
-			</div>
-		</div>
-		<sing-img :sing-img="singImgObj" @changeBg="bgColor" v-show="singImgShow"></sing-img>
-		<lyric :lyric-obj="lyricObj" v-show="!singImgShow"></lyric>
-		<div class="player" ref="player">
-			<div class="progress">
-				<div class="st">{{songCurStr}}</div>
-				<div class="proBar">
-					<div class="curBar" ref="curBar"></div>
-					<div class="allBar"></div>
-					<div class="conBar" ref="conBar"></div>
-				</div>
-				<div class="at t_r">{{songLongStr}}</div>
-			</div>
-			<div class="control">
-				<i class="icon iconfont cond">&#xe67b;</i>
-				<div class="cont">
-					<i class="icon iconfont pre" @click="pre">&#xe78a;</i>
-					<!-- 暂停&#xe60b; -->
-					<i class="icon iconfont play t_c" v-html="playIcon" @click="opa"></i>
-					<i class="icon iconfont next" @click="next">&#xe7a5;</i>
-				</div>
-				<i class="icon iconfont cond t_r" >&#xe6fa;</i>
-			</div>
-		</div>
-		<audio src="/static/media/xcds.mp3" class="none" preload="load" ref="sion"></audio>
+		<sing-head></sing-head>
+		<sing-img :singImgOb="singImgObj"  @changeBg="bgColor" v-show="singImgShow"></sing-img>
+		<lyric :lyricOb="lyricObj"  v-show="!singImgShow"></lyric>
+		<player></player>	
 	</div>
 </template>
 <script>
 	import Bus from '@/common/js/bus.js'
+	import singHead from './singhead'
 	import singImg from './singimg'
 	import Lyric from './lyric'
+	import player from './player'
 	export default {
 		components:{
+			singHead,
 			singImg,
-			Lyric
+			Lyric,
+			player
 		},
 		data() {
 			return {
 				winHeight:document.body.clientHeight,
-				singImgObj:{},//歌曲封面数据
-				lyricObj:{//歌词组件数据
-					conHeight:null,//组件高度
-					sing:null//歌词
-				},
-				singImgShow:true,//是否显示歌曲图片
-				play:'&#xe684;',//播放icon
-				pause:'&#xe60b;',//暂停icon
-				playIcon:null,//界面按钮icon
-				playB:false,//播放状态
+				singImgShow:false,//显示图片或歌词 true图片 false歌词
 				colorArr:[],//图片颜色反色数组 r g b
-				song:null,//歌曲DOM
-				songCurT:0,//歌曲当前时间 数字格式
-				songCurStr:'00:00',//歌曲当前时间 时分格式
-				songLongT:0,//歌曲时间 数字格式
-				songLongStr:'00:00',//歌曲时间 时分格式
-				readyState:0,//歌曲缓冲状态
-				cache:0//歌曲缓冲进度
+				singImgObj:{//图片数据
+					contentH:0//组件高度
+				},
+				lyricObj:{//歌词数据
+					contentH:0//组件高度
+				}
 			}
 		},
 		mounted() {
-			let self = this;
-			let playerHeight = self.$refs.player.clientHeight,
-				conHeight = self.winHeight - 60 - playerHeight;
-			self.lyricObj['conHeight'] = conHeight;
-			self.singImgObj['conHeight'] = conHeight;
-			self.playIcon = self.play;
-			self.$nextTick(() => {
-				self.song = self.$refs.sion;
-				let song = self.$refs.sion;
-				self.initPage();
-				//实时监听歌曲当前播放时间
-				self.song.addEventListener('timeupdate',(e)=> {
-					this.countTime(e.target.currentTime)
-				});
-				Bus.$on('showimg',(status)=> {
-					this.singImgShow = status;
-				});
-				
-			});
+			this.singImgObj.contentH = this.winHeight - 134;
+			this.lyricObj.contentH = this.winHeight - 134;
 		},
 		methods: {
 			//根据歌手图片渲染页面背景 主色:bgColor['s']  次色:bgColor['e']
@@ -99,73 +44,9 @@
 					this.colorArr.push( 255 - Number(val));
 				}
 				this.$refs.sing.style.backgroundImage = "linear-gradient(200deg, " + bgColor['s'] + "," + bgColor['e'] + ")";
-			},
-			//初始化歌曲时间
-			initPage() {
-				let song = this.song;
-				//监听歌曲是否加载完成
-				song.addEventListener('canplaythrough',()=> {
-					this.readyState = song.readyState;
-					this.songLongT = parseInt(song.duration);
-					this.initSongT(this.songLongT,'s');
-				});
-			},
-			//time 歌曲时间 
-			//type 开始or结束
-			initSongT(time,type) {
-				let min = parseInt(time / 60),
-					sec = time % 60;
-				min < 10 && (min = '0' + min);	
-				sec < 10 && (sec = '0' + sec);	
-				let	timeStr = min + ":" + sec;
-				type ? this.songLongStr = timeStr : this.songCurStr = timeStr;
-			},
-			//计算歌曲时间 改变进度条
-			//time 当前播放时间
-			countTime(time) {
-				this.songCurT = parseInt(time);
-				let songCurT = this.songCurT,
-					progress = songCurT * 100 / this.songLongT + '%';
-				this.$refs.curBar.style.width = progress;
-				this.$refs.conBar.style.left = progress;
-				this.initSongT(songCurT);
-				'100%' == progress && Bus.$emit('playB',false);
-			},
-			//上一首
-			pre() {
-				this.changeSong('left')
-			},
-			//下一首
-			next() {
-				this.changeSong('right')
-			},
-			//播放暂停
-			opa() {
-				//this.readyState = 4 表示正确获取到歌曲
-				if(4 !=this.readyState ) {
-					alert('歌曲没准备好');
-					return 
-				}
-				let song = this.song;
-				if(!this.playB) {//播放
-					this.playB = true;
-					this.playIcon = this.pause;
-					song.play();
-				} else {//暂停
-					this.playIcon = this.play;
-					this.playB = false;
-					song.pause();
-				}
-				Bus.$emit('playB',this.playB);
-
-			},
-			//上下一首
-			changeSong(index) {
-				'left' == index ? console.info('上一首') : console.info('下一首'); 
-			},
-			back() {
-				this.$router.go(-1);
 			}
+			
+			
 
 		}
 		
@@ -176,97 +57,6 @@
 	@import '../../common/stylus/public.styl'
 	.sing
 		height:100%	
-		overflow_h()
-		.head
-			color:#Fff
-			height:54px
-			display:flex
-			&>div:nth-child(1)
-				flex:1
-				bs()
-				pl(20px)
-				lh(54px)
-				i
-					font_s(20px)
-			&>div:nth-child(2)
-				flex:5
-				overflow_h()
-				p:nth-child(1)
-					pt(6px)
-					lh(26px)
-				p:nth-child(2)
-					font_s(8px)
-					overflow_t()
-					color:#919084
-			&>div:nth-child(3)
-				bs()
-				pr(10px)
-				lh(54px)
-				flex:2
-				i
-					font_s(24px)
-					extend_click()
-					&:nth-child(1)
-						margin-right:16px
-		.player
-			fi()
-			bottom:0
-			color:#d0c8c3
-			height:67px
-			width:92%
-			padding:0 4% 3%
-			.progress
-				display:flex
-				margin-bottom:15px
-				heihgt:12px
-				lh(12px)
-				.st,.at
-					font_s(10px)
-					flex:1
-				.proBar
-					flex:7
-					re()
-					.curBar,.allBar
-						ab()
-						height:2px
-						top:4px
-					.curBar
-						width:0
-						bg_color(#d33a31)
-						z-index:4
-					.allBar
-						width:100%
-						bg_color(#d0c8c3)
-						z-index:3
-					.conBar
-						ab()
-						width:14px
-						height:14px
-						border-radius:50%
-						bg_color(#fff);
-						z-index:5
-						top:-2px
-						left:0
-			.control
-				display:flex
-				height:40px
-				lh(40px)
-				i
-					font_s(20px)
-				.cond
-					flex:1
-				.cont
-					flex:2.5
-					display:flex
-					.pre,.next
-						flex:13
-						extend_click()
-					.play
-						flex:74
-						font_s(40px)
-					
-			
-		
-				
+		overflow_h()	
 		
 </style>

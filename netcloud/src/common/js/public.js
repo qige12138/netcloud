@@ -23,7 +23,7 @@ export const net = {
         shadeClose = shadeClose ? true : false;
         layer.open({
             type: 2,
-            content: t || '加载中，先喝杯茶~~',
+            content: t,
             shade: 'background-color: rgba(0,0,0,.5)',
             shadeClose:shadeClose
         });
@@ -82,21 +82,23 @@ export const net = {
     * 获取用户信息
     */
     msg() {
-        return this.getStorage('msg')
+        let msg;
+        this.getStorage('msg') && (msg = this.getStorage('msg'));
+        return msg
     },
      /**
     * 获取用户uid
     */
     uid() {
-        var msg = this.getStorage('msg');
-        return msg['account']['id']
+        let uid;
+        this.getStorage('msg') && (uid = this.getStorage('msg')['account']['id']);
+        return uid
     },
     /**
     * 数字超过一万用万表示
     * @param num number
     */
     formatNum(num) {
-        var numT = '';
         return num > 10000 ? ((num / 10000).toFixed(1) + '万') : num
     }
 

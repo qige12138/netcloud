@@ -54,15 +54,17 @@
 			* @params id 歌单id
 			*/
 			golist(id) {
-				this.net.load();
 				this.ajax.get('/playlist/detail',{
-					id:id
+					id:id,
+					load:' '
 				})
 				.then(res=> {
 					this.net.closeAll();
 					this.$router.push({
 						path:'/list',
-						query:res.result
+						query:{
+							ret:JSON.stringify(res.result)
+						}
 					})
 				})
 				

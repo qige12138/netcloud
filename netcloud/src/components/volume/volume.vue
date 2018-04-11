@@ -29,7 +29,8 @@
 		methods:{
 			getDj() {
 				this.ajax.get('user/dj',{
-					uid:this.net.uid()
+					uid:this.net.uid(),
+					load:' '
 				})
 				.then(res=> {
 					if(!res) return

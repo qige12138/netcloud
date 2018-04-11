@@ -1,5 +1,5 @@
 <template>
-	<div class="singImg" ref="singImgC" @click="showImg">
+	<div class="singImg" ref="singImgC">
 		<div class="singer bd_top">
 			<img src="../../common/img/bang.png" class="bang" :class="{'pause':!playb}">
 			<div class="pan" :class="{'pause':!playb}">
@@ -36,12 +36,12 @@
 				sion:null
 			}
 		},
-		props:['singImg'],
+		props:['singImgOb'],
 		mounted() {
 			let self = this;
 			self.$nextTick(() =>{
 				self.getImgColor();
-				self.$refs.singImgC.style.height = this.singImg.conHeight + 'px';
+				self.$refs.singImgC.style.height = this.singImgOb.contentH + 'px';
 				Bus.$on('playB',(playb) => {
 					self.playb = playb;
 				});
@@ -61,11 +61,7 @@
 					    self.$emit('changeBg',bgColor);
 					}
 				});
-			},
-			//点击图片  图片组件消失
-			showImg() {
-        		Bus.$emit('showimg',false);
-        	}
+			}
 		}
 	}
 </script>
