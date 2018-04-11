@@ -22,7 +22,7 @@
 		data() {
 			return {
 				winHeight:document.body.clientHeight,
-				singImgShow:false,//显示图片或歌词 true图片 false歌词
+				singImgShow:true,//显示图片或歌词 true图片 false歌词
 				colorArr:[],//图片颜色反色数组 r g b
 				singImgObj:{//图片数据
 					contentH:0//组件高度
