@@ -1,9 +1,9 @@
 <template>
 	<div class="sing" ref="sing">
-		<sing-head></sing-head>
-		<sing-img :singImgOb="singImgObj"  @changeBg="bgColor" v-show="singImgShow"></sing-img>
-		<lyric :lyricOb="lyricObj"  v-show="!singImgShow"></lyric>
-		<player></player>	
+		<sing-head :singHeader="singHeadr"></sing-head>
+		<sing-img :singImgOb="singObj"  @changeBg="bgColor" v-show="singImgShow"></sing-img>
+		<lyric :lyricOb="singObj"  v-show="!singImgShow"></lyric>
+		<player :singid="singObj.id"></player>	
 	</div>
 </template>
 <script>
@@ -24,17 +24,17 @@
 				winHeight:document.body.clientHeight,
 				singImgShow:true,//显示图片或歌词 true图片 false歌词
 				colorArr:[],//图片颜色反色数组 r g b
-				singImgObj:{//图片数据
-					contentH:0//组件高度
+				singObj:{//图片数据
+					contentH:0,//组件高度
+					id:this.$route.query.id,
+					img:JSON.parse(this.$route.query.singMsg).singImg
 				},
-				lyricObj:{//歌词数据
-					contentH:0//组件高度
-				}
+				singHeadr:JSON.parse(this.$route.query.singMsg)
+				
 			}
 		},
 		mounted() {
-			this.singImgObj.contentH = this.winHeight - 134;
-			this.lyricObj.contentH = this.winHeight - 134;
+			this.singObj.contentH = this.winHeight - 134;
 		},
 		methods: {
 			//根据歌手图片渲染页面背景 主色:bgColor['s']  次色:bgColor['e']

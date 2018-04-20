@@ -1,10 +1,10 @@
 <template>
 	<div class="singImg" ref="singImgC">
 		<div class="singer bd_top">
-			<img src="../../common/img/bang.png" class="bang" :class="{'pause':!playb}">
-			<div class="pan" :class="{'pause':!playb}">
+			<img src="../../common/img/bang.png" class="bang" :class="{'pause':!playOrPause}">
+			<div class="pan" :class="{'pause':!playOrPause}">
 				<div>
-					<img src="../../common/img/rec3.jpg" ref="singImg">
+					<img :src="singImgOb.img" ref="singImg">
 				</div>
 			</div>
 		</div>
@@ -29,22 +29,20 @@
 <script>
 	import Bus from '@/common/js/bus'
 	import {getColor} from '@/common/js/getimgcolor'
+	import {mapState,mapActions} from "vuex"
+	
 	export default {
-		data() {
-			return {
-				playb:false,
-				sion:null
-			}
-		},
 		props:['singImgOb'],
+		computed:{
+			...mapState({
+				playOrPause: state => state.playOrPause
+			})
+		},
 		mounted() {
 			let self = this;
 			self.$nextTick(() =>{
 				self.getImgColor();
 				self.$refs.singImgC.style.height = this.singImgOb.contentH + 'px';
-				Bus.$on('playB',(playb) => {
-					self.playb = playb;
-				});
 			});
 		},
 		methods: {
@@ -61,6 +59,10 @@
 					    self.$emit('changeBg',bgColor);
 					}
 				});
+			},
+			//获取图片封面
+			getImg() {
+
 			}
 		}
 	}

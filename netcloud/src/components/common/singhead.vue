@@ -4,8 +4,8 @@
 			<i class="icon iconfont">&#xe617;</i>
 		</div>
 		<div>
-			<p>歌单</p>
-			<p>编辑推荐：我们彼此相爱，就是为民除害</p>
+			<p>{{singHeader['singName']}}</p>
+			<p>{{singHeader['singerName']}}</p>
 		</div>
 		<div class="t_r">
 			<i class="icon iconfont">&#xe638;</i>
@@ -14,6 +14,7 @@
 </template>
 <script>
 	export default{
+		props:['singHeader'],
 		methods:{
 			back() {
 				this.$router.go(-1);

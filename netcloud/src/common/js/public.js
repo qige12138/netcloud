@@ -100,6 +100,21 @@ export const net = {
     */
     formatNum(num) {
         return num > 10000 ? ((num / 10000).toFixed(1) + '万') : num
+    },
+    /**
+    * 将Number 的时间转化为 "00:00:00"格式的字符串
+    * @params t Number
+    */
+    dealTime(t) {
+        t = parseInt(t);
+        let h = parseInt(t / 3600),
+            m = parseInt(t / 60),
+            s = t % 60;
+        m < 10 && ( m = '0' + m);
+        s < 10 && ( s = '0' + s);
+        h = h == 0 ? m : h + ":" + m;
+        return h + ':' + s
+
     }
 
 

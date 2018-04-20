@@ -15,7 +15,7 @@
 				<div class="ser">
 					{{index + 1}}
 				</div>
-				<div class="bd_bottom singMsg" @click="play(song.id)">
+				<div class="bd_bottom singMsg" @click="play(song.id,song['name'],song['artists'][0]['name'],song['album']['blurPicUrl'])">
 					<div>
 						<p>{{song['name']}}</p>
 						<p>{{song['artists'][0]['name']}}-{{song['album']['name']}}</p>
@@ -34,13 +34,19 @@
 		mounted() {
 		},
 		methods:{
-			//播放歌曲 id 歌曲ID
-			play(id) {
+			//播放歌曲 id 歌曲ID singname歌曲名字 singername歌手名字 singimg歌曲封面
+			play(id,singname,singername,singimg) {
+				let obj = {
+					id:id,
+					singMsg:JSON.stringify({
+						singName:singname,
+						singerName:singername,
+						singImg:singimg
+					})
+				}
 				this.$router.push({
 					path:'/sing',
-					query:{
-						id:id
-					}
+					query:obj
 				});
 			}
 		}
