@@ -1,8 +1,8 @@
 <template>
 	<div class="lyric t_c" ref="lyric" @click="showImg">
 		<p v-show="!lyricS">无歌词</p>
-		<ul v-show="lyricS">
-			<li v-for="(item,index) in lyricS" :class="{'chec':showLyric(item,index)}">
+		<ul v-show="lyricS" ref="lyricele" :style="{top:top,transform:'translate3d(0,' + toph + ',0)'}">
+			<li v-for="(item,index) in lyricS" :class="{'chec':showLyric(item,index)}" :key="index">
 				{{item['c']}}
 			</li>
 		</ul>
@@ -14,6 +14,8 @@
 	export default {
 		data() {
 			return {
+				top:0,
+				toph:0,
 				lyricS:false//歌词数组
 			}
 		},
@@ -25,6 +27,7 @@
 		},
         mounted() {
         	this.$nextTick(()=> {
+				this.top = this.lyricOb.contentH / 2 + 'px';
         		this.$refs.lyric.style.height = this.lyricOb.contentH + 'px';
         		this.getLyric();
         	});
@@ -64,9 +67,13 @@
         		});
         	},
         	//显示当前歌词 arr当前歌词对象 index 索引
-        	showLyric(obj,index) {
+        	showLyric(obj,index) {	
         		let singTime = this.singTime,
-        			lyricS = this.lyricS;
+					lyricS = this.lyricS;
+				if(!singTime ) return false;
+				let inde = this.getIndex() || 0;//当前歌词行数
+				console.info(inde)
+				this.toph = -35 * inde + 'px';
     			if(index < lyricS.length - 1) {
     				if(singTime >= obj['t'] && singTime < lyricS[index + 1]['t']) {
     					return true
@@ -76,8 +83,22 @@
     					return true
     				}
     			}
-        		
-        	}
+				return false
+			},
+			//获取当前是哪一行歌词
+			getIndex() {
+				let lyricS = this.lyricS,
+					singTime = this.singTime,
+					len = lyricS.length;
+				for(let i = 0,item; item = lyricS[i++];) {					
+					if((singTime >= item['t'] && singTime < lyricS[i + 1]['t'] && i < len - 2) || (i == len - 1 && singTime >= lyricS[len - 1]['t'])) {
+						item['check'] = true
+						return i + 1
+					} else {
+						item['check'] = false
+					}
+				}
+			}
         }
 	}
 </script>
@@ -85,16 +106,18 @@
 <style lang="stylus" scoped>
 	@import '../../common/stylus/public.styl'
 	.lyric
+		re()
 		color:#fff
 		bg_color(transparent)
 		pad_(20px,0)
 		bs()
 		overflow_h()
 		ul 
-			height:100%
+			ab()
+			w(100%)
 			font_s(12px)
 			lh(20px)
-			overflow:auto
+			transition : all .3s linear
 			.chec
 				color:red
 			li

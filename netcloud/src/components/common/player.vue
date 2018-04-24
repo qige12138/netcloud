@@ -51,7 +51,6 @@
 			self_.playIcon = self_.play;
 			self_.sing.singEle = self_.$refs.sion;
 			let sing = self_.sing.singEle;
-			sing.currentTime = 210;
 			//监听歌曲播放时间
 			sing.addEventListener("timeupdate",()=> {
 				let curTime = Math.floor(sing.currentTime);
