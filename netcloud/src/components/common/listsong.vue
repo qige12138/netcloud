@@ -29,11 +29,15 @@
 	</div>
 </template>
 <script>
+	import {mapActions} from 'vuex'
 	export default {
 		props:['songlist'],
 		mounted() {
 		},
 		methods:{
+			...mapActions({
+				'lyStatus':'lyStatus'
+			}),
 			//播放歌曲 id 歌曲ID singname歌曲名字 singername歌手名字 singimg歌曲封面
 			play(id,singname,singername,singimg) {
 				let obj = {
@@ -44,6 +48,7 @@
 						singImg:singimg
 					})
 				}
+				this.lyStatus({s:false})
 				this.$router.push({
 					path:'/sing',
 					query:obj

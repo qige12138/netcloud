@@ -45,7 +45,6 @@
 			p:nth-child(2)
 				font_s(8px)
 				overflow_t()
-				color:#919084
 		&>div:nth-child(3)
 			bs()
 			pr(10px)

@@ -51,17 +51,20 @@
 			self_.playIcon = self_.play;
 			self_.sing.singEle = self_.$refs.sion;
 			let sing = self_.sing.singEle;
+			sing.currentTime = 210;
 			//监听歌曲播放时间
 			sing.addEventListener("timeupdate",()=> {
 				let curTime = Math.floor(sing.currentTime);
 				self_.sing.curTimes = self_.net.dealTime(curTime);
 				this.progressBar(curTime)
+				this.changeSongT({n:curTime})
 			});
 			this.getUrl();
 		},
 		methods:{
 			...mapActions({
-				'plOrPa':'plOrPa'
+				'plOrPa':'plOrPa',//暂停播放
+				'changeSongT':'changeSongT'//歌曲当前播放时间
 			}),
 			//初始化歌曲信息
 			initSing() {
@@ -118,8 +121,6 @@
 				let self_ = this,
 					allTime = self_.sing.allTimen;
 				self_.progress = t / allTime * 100 + '%';
-
-
 			}
 			
 		}

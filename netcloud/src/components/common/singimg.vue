@@ -1,6 +1,6 @@
 <template>
 	<div class="singImg" ref="singImgC">
-		<div class="singer bd_top">
+		<div class="singer bd_top" @click="showLyric">
 			<img src="../../common/img/bang.png" class="bang" :class="{'pause':!playOrPause}">
 			<div class="pan" :class="{'pause':!playOrPause}">
 				<div>
@@ -46,6 +46,9 @@
 			});
 		},
 		methods: {
+			...mapActions({
+				'lyStatus':'lyStatus'
+			}),
 			//获取图片的主色和次色 dominant主色  secondary次色
 			getImgColor() {
 				let self = this;
@@ -60,9 +63,9 @@
 					}
 				});
 			},
-			//获取图片封面
-			getImg() {
-
+			//显示歌词组件
+			showLyric() {
+				this.lyStatus({s:true})
 			}
 		}
 	}

@@ -1,8 +1,8 @@
 <template>
 	<div class="sing" ref="sing">
 		<sing-head :singHeader="singHeadr"></sing-head>
-		<sing-img :singImgOb="singObj"  @changeBg="bgColor" v-show="singImgShow"></sing-img>
-		<lyric :lyricOb="singObj"  v-show="!singImgShow"></lyric>
+		<sing-img :singImgOb="singObj"  @changeBg="bgColor" v-show="!showLyric"></sing-img>
+		<lyric :lyricOb="singObj"  v-show="showLyric"></lyric>
 		<player :singid="singObj.id"></player>	
 	</div>
 </template>
@@ -12,6 +12,7 @@
 	import singImg from './singimg'
 	import Lyric from './lyric'
 	import player from './player'
+	import {mapState,mapActions} from "vuex"
 	export default {
 		components:{
 			singHead,
@@ -22,7 +23,6 @@
 		data() {
 			return {
 				winHeight:document.body.clientHeight,
-				singImgShow:true,//显示图片或歌词 true图片 false歌词
 				colorArr:[],//图片颜色反色数组 r g b
 				singObj:{//图片数据
 					contentH:0,//组件高度
@@ -32,6 +32,11 @@
 				singHeadr:JSON.parse(this.$route.query.singMsg)
 				
 			}
+		},
+		computed:{
+			...mapState({
+				showLyric:state=> state.showLyric
+			})
 		},
 		mounted() {
 			this.singObj.contentH = this.winHeight - 134;
