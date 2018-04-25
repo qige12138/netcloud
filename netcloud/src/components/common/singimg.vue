@@ -8,7 +8,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="singMsg">
+		<div class="singMsg" :style="{color:fontColor}">
 			<div>
 				<i class="icon iconfont">&#xe62b;</i>
 			</div>
@@ -35,7 +35,8 @@
 		props:['singImgOb'],
 		computed:{
 			...mapState({
-				playOrPause: state => state.playOrPause
+				playOrPause: state => state.playOrPause,
+				fontColor:state=> state.fontColor
 			})
 		},
 		mounted() {
@@ -118,7 +119,6 @@
 						height:100%
 						border-radius:50%
 		.singMsg
-			color:#d0c8c3
 			ab()
 			bs()
 			width:100%

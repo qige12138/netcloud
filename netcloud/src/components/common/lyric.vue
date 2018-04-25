@@ -1,8 +1,8 @@
 <template>
-	<div class="lyric t_c" ref="lyric" @click="showImg">
+	<div class="lyric t_c" ref="lyric" @click="showImg" :style="{color:fontColor}">
 		<p v-show="!lyricS">无歌词</p>
-		<ul v-show="lyricS" ref="lyricele" :style="{top:top,transform:'translate3d(0,' + toph + ',0)'}">
-			<li v-for="(item,index) in lyricS" :class="{'chec':showLyric(item,index)}" :key="index">
+		<ul v-show="lyricS" ref="lyricele" :style="{transform:'translate3d(0,' + toph + ',0)'}">
+			<li v-for="(item,index) in lyricS" :class="{'chec':item['chec']}" :key="index">
 				{{item['c']}}
 			</li>
 		</ul>
@@ -14,7 +14,6 @@
 	export default {
 		data() {
 			return {
-				top:0,
 				toph:0,
 				lyricS:false//歌词数组
 			}
@@ -22,14 +21,14 @@
 		props:['lyricOb'],
 		computed:{
 			...mapState({
-				singTime:state=> state.singTime
+				singTime:state=> state.singTime,
+				fontColor:state=> state.fontColor
 			})
 		},
         mounted() {
         	this.$nextTick(()=> {
-				this.top = this.lyricOb.contentH / 2 + 'px';
         		this.$refs.lyric.style.height = this.lyricOb.contentH + 'px';
-        		this.getLyric();
+				this.getLyric();
         	});
         },
         methods:{
@@ -47,7 +46,7 @@
         			id:self_.lyricOb.id
         		})
         		.then(res => { 
-        			if(res.nolyric) return
+        			if(res.nolyric) return//没有歌词
         			let lyricArr = res.lrc.lyric.split("\n"),//歌词数组
         				lyricArrObj = [],//有时间才数据
         				t,//时间
@@ -63,43 +62,31 @@
         					c:c//歌词内容
         				});
         			}
-        			self_.lyricS = lyricArrObj;
+					self_.lyricS = lyricArrObj;
+
         		});
         	},
-        	//显示当前歌词 arr当前歌词对象 index 索引
-        	showLyric(obj,index) {	
-        		let singTime = this.singTime,
-					lyricS = this.lyricS;
-				if(!singTime ) return false;
-				let inde = this.getIndex() || 0;//当前歌词行数
-				console.info(inde)
-				this.toph = -35 * inde + 'px';
-    			if(index < lyricS.length - 1) {
-    				if(singTime >= obj['t'] && singTime < lyricS[index + 1]['t']) {
-    					return true
-        			}
-    			} else {
-    				if(singTime >= lyricS[lyricS.length - 1]['t']) {
-    					return true
-    				}
-    			}
-				return false
-			},
 			//获取当前是哪一行歌词
 			getIndex() {
 				let lyricS = this.lyricS,
 					singTime = this.singTime,
 					len = lyricS.length;
-				for(let i = 0,item; item = lyricS[i++];) {					
-					if((singTime >= item['t'] && singTime < lyricS[i + 1]['t'] && i < len - 2) || (i == len - 1 && singTime >= lyricS[len - 1]['t'])) {
-						item['check'] = true
-						return i + 1
+				for(let i = 0; i < len; i++) {
+					if((singTime >= lyricS[i]['t'] && singTime < lyricS[i + 1]['t'] && i < len - 2) || (i == len - 1 && singTime >= lyricS[len - 1]['t'])) {
+						lyricS[i]['chec'] = true
+						return i
 					} else {
-						item['check'] = false
+						lyricS[i]['chec'] = false
 					}
 				}
 			}
-        }
+        },
+		watch:{
+			singTime(val) {
+				let inde = this.getIndex();//当前歌词行数
+				this.toph = -35 * (inde + 1) + 'px';
+			}
+		}
 	}
 </script>
 
@@ -107,20 +94,24 @@
 	@import '../../common/stylus/public.styl'
 	.lyric
 		re()
-		color:#fff
 		bg_color(transparent)
 		pad_(20px,0)
 		bs()
 		overflow_h()
 		ul 
 			ab()
+			left:0
+			top:50%
+			pad(20px)
 			w(100%)
+			bs()
 			font_s(12px)
 			lh(20px)
 			transition : all .3s linear
 			.chec
-				color:red
+				color: blue
 			li
+				h(20px)
 				pb(15px)
 			
 					

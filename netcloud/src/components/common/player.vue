@@ -1,5 +1,5 @@
 <template>
-	<div class="playerWrap">
+	<div class="playerWrap" :style="{color:fontColor}">
 		<div class="player" ref="player">
 			<div class="progress">
 				<div class="st">{{sing.curTimes}}</div>
@@ -25,7 +25,7 @@
 	</div>
 </template>
 <script>
-	import {mapActions} from "vuex"
+	import {mapState,mapActions} from "vuex"
 	export default{
 		data() {
 			return {
@@ -45,6 +45,11 @@
 			}
 		},
 		props:['singid'],
+		computed:{
+			...mapState({
+				fontColor:state=> state.fontColor
+			})
+		},
 		mounted() {
 
 			let self_ = this;
@@ -130,7 +135,6 @@
 	@import '../../common/stylus/public.styl'
 	.playerWrap
 		fi()
-		color:#d0c8c3
 		height:80px
 		width:100%
 		padding:0 4% 3%

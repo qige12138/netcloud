@@ -7,7 +7,8 @@ const state = {
 	lStatus:true,//登录状态
 	playOrPause:false,//歌曲播放状态
 	showLyric:false,//是否显示歌词
-	singTime:0//歌曲播放时间
+	singTime:0,//歌曲播放时间
+	fontColor:null//背景反色
 }
 const mutations = {
 	/**
@@ -37,6 +38,13 @@ const mutations = {
 	*/
 	showSongTime(state,n) {
 		state.singTime = n
+	},
+	/**
+	* 背景反色
+	* @param arr arr
+	*/
+	fontColo(state,arr) {
+		state.fontColor = 'rgb(' + arr[0] + ',' + arr[1] + ',' + arr[2] + ')'
 	}
 }
 const actions = {
@@ -51,6 +59,9 @@ const actions = {
 	},
 	changeSongT({commit},{n}) {
 		commit('showSongTime',n)
+	},
+	changeFontC({commit},{arr}) {
+		commit('fontColo',arr)
 	}
 
 }

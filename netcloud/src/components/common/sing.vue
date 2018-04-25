@@ -42,12 +42,17 @@
 			this.singObj.contentH = this.winHeight - 134;
 		},
 		methods: {
+			...mapActions({
+				'changeFontC':'changeFontC'
+			}),
 			//根据歌手图片渲染页面背景 主色:bgColor['s']  次色:bgColor['e']
 			bgColor(bgColor) {
-				let color = bgColor['s'].slice(4,-1).split(',');
+				let color = bgColor['s'].slice(4,-1).split(','),
+					colorArr = [];
 				for(let val of color) {
-					this.colorArr.push( 255 - Number(val));
+					colorArr.push( 255 - Number(val));
 				}
+				this.changeFontC({arr:colorArr})
 				this.$refs.sing.style.backgroundImage = "linear-gradient(200deg, " + bgColor['s'] + "," + bgColor['e'] + ")";
 			}
 			

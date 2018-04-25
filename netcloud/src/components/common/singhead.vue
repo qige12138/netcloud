@@ -1,5 +1,5 @@
 <template>
-	<div class="head">
+	<div class="head" :style="{color:fontColor}">
 		<div @click="back">
 			<i class="icon iconfont">&#xe617;</i>
 		</div>
@@ -13,8 +13,14 @@
 	</div>
 </template>
 <script>
+	import {mapState} from 'vuex'
 	export default{
 		props:['singHeader'],
+		computed:{
+			...mapState({
+				fontColor:state=> state.fontColor
+			})
+		},
 		methods:{
 			back() {
 				this.$router.go(-1);
@@ -26,7 +32,6 @@
 <style scoped lang='stylus'>
 	@import '../../common/stylus/public.styl'
 	.head
-		color:#Fff
 		height:54px
 		display:flex
 		&>div:nth-child(1)
@@ -40,6 +45,7 @@
 			flex:5
 			overflow_h()
 			p:nth-child(1)
+				overflow_t()
 				pt(6px)
 				lh(26px)
 			p:nth-child(2)
