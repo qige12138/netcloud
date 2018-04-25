@@ -3,9 +3,9 @@
 		<div class="player" ref="player">
 			<div class="progress">
 				<div class="st">{{sing.curTimes}}</div>
-				<div class="proBar">
-					<div class="curBar" :style="'width:'+ progress" ref="curBar"></div>
-					<div class="allBar"></div>
+				<div class="proBar" @touchend="getPos(0)" @touchmove="getPos(1)" @touchstart="changeDrag" ref="proBar">
+					<div class="curBar" :style="{width:progress,background:curLcolor}" ref="curBar"></div>
+					<div class="allBar" :style="{background:fontColor}"></div>
 					<div class="conBar" :style="'left:'+ progress" ref="conBar"></div>
 				</div>
 				<div class="at t_r">{{sing.allTimes}}</div>
@@ -40,14 +40,16 @@
 					allTimes:'00:00',//歌曲全部时间 String
 					allTimen:0//歌曲全部时间 Number
 				},
-				progress:0//进度
+				progress:0,//进度
+				dragStatus:false//是否拖动
 				
 			}
 		},
 		props:['singid'],
 		computed:{
 			...mapState({
-				fontColor:state=> state.fontColor
+				fontColor:state=> state.fontColor,
+				curLcolor:state=> state.curLcolor
 			})
 		},
 		mounted() {
@@ -58,12 +60,15 @@
 			let sing = self_.sing.singEle;
 			//监听歌曲播放时间
 			sing.addEventListener("timeupdate",()=> {
-				let curTime = Math.floor(sing.currentTime);
-				self_.sing.curTimes = self_.net.dealTime(curTime);
-				this.progressBar(curTime)
-				this.changeSongT({n:curTime})
+				if(Math.floor(sing.duration) == Math.floor(sing.currentTime)) {					
+					sing.currentTime = 0;
+				}
+				self_.sing.curTimen = Math.floor(sing.currentTime);
+				self_.sing.curTimes = self_.net.dealTime(self_.sing.curTimen);				
+				!self_.dragStatus && self_.progressBar(self_.sing.curTimen)
+				self_.changeSongT({n:self_.sing.curTimen})
 			});
-			this.getUrl();
+			self_.getUrl();
 		},
 		methods:{
 			...mapActions({
@@ -125,6 +130,23 @@
 				let self_ = this,
 					allTime = self_.sing.allTimen;
 				self_.progress = t / allTime * 100 + '%';
+			},
+			//获取鼠标位置 s num 判断是否改变歌曲播放时间
+			getPos(s) {
+				let proBar = this.$refs.proBar,
+					x = window.event.changedTouches[0].clientX - proBar.offsetLeft,
+					w = proBar.clientWidth,
+					pro = x / w;
+				if(s) {//拖动
+					this.progress = pro * 100 + "%";
+				} else {//点击
+					this.sing.singEle.currentTime = this.sing.allTimen * pro;
+					this.dragStatus = false;
+				}
+				
+			},
+			changeDrag() {
+				this.dragStatus = true;
 			}
 			
 		}
@@ -135,7 +157,7 @@
 	@import '../../common/stylus/public.styl'
 	.playerWrap
 		fi()
-		height:80px
+		height:90px
 		width:100%
 		padding:0 4% 3%
 		bottom:0
@@ -143,35 +165,37 @@
 		.player
 			.progress
 				display:flex
-				margin-bottom:15px
+				margin-bottom:10px
 				heihgt:12px
 				lh(12px)
 				.st,.at
 					font_s(10px)
+					pt(10px)
 					flex:1
 				.proBar
+					extend_click()
 					flex:7
 					re()
+					bs()
+					h(30px)
 					.curBar,.allBar
 						ab()
 						height:2px
-						top:4px
+						top:16px
 					.curBar
 						width:0
-						bg_color(#d33a31)
 						z-index:4
 					.allBar
 						width:100%
-						bg_color(#d0c8c3)
 						z-index:3
 					.conBar
 						ab()
 						width:14px
 						height:14px
 						border-radius:50%
-						bg_color(#fff);
+						background:rgba(255,45,5,.9)
 						z-index:5
-						top:-2px
+						top:10px
 						left:0
 			.control
 				display:flex

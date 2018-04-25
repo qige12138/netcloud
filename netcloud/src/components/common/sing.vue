@@ -39,11 +39,12 @@
 			})
 		},
 		mounted() {
-			this.singObj.contentH = this.winHeight - 134;
+			this.singObj.contentH = this.winHeight - 144;
 		},
 		methods: {
 			...mapActions({
-				'changeFontC':'changeFontC'
+				'changeFontC':'changeFontC',
+				'changecurC':'changecurC'
 			}),
 			//根据歌手图片渲染页面背景 主色:bgColor['s']  次色:bgColor['e']
 			bgColor(bgColor) {
@@ -52,7 +53,8 @@
 				for(let val of color) {
 					colorArr.push( 255 - Number(val));
 				}
-				this.changeFontC({arr:colorArr})
+				this.changeFontC({arr:colorArr});
+				this.changecurC({arr:colorArr});
 				this.$refs.sing.style.backgroundImage = "linear-gradient(200deg, " + bgColor['s'] + "," + bgColor['e'] + ")";
 			}
 			

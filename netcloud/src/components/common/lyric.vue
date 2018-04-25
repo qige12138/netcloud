@@ -2,7 +2,7 @@
 	<div class="lyric t_c" ref="lyric" @click="showImg" :style="{color:fontColor}">
 		<p v-show="!lyricS">无歌词</p>
 		<ul v-show="lyricS" ref="lyricele" :style="{transform:'translate3d(0,' + toph + ',0)'}">
-			<li v-for="(item,index) in lyricS" :class="{'chec':item['chec']}" :key="index">
+			<li v-for="(item,index) in lyricS" :style="{color:item['curColor']}" :key="index">
 				{{item['c']}}
 			</li>
 		</ul>
@@ -22,7 +22,8 @@
 		computed:{
 			...mapState({
 				singTime:state=> state.singTime,
-				fontColor:state=> state.fontColor
+				fontColor:state=> state.fontColor,
+				curLcolor:state=> state.curLcolor
 			})
 		},
         mounted() {
@@ -70,19 +71,19 @@
 			getIndex() {
 				let lyricS = this.lyricS,
 					singTime = this.singTime,
-					len = lyricS.length;
+					len = lyricS.length;					
 				for(let i = 0; i < len; i++) {
-					if((singTime >= lyricS[i]['t'] && singTime < lyricS[i + 1]['t'] && i < len - 2) || (i == len - 1 && singTime >= lyricS[len - 1]['t'])) {
-						lyricS[i]['chec'] = true
+					if((i <= len - 2 && singTime >= lyricS[i]['t'] && singTime < lyricS[i + 1]['t']) || (i == len - 1 && singTime >= lyricS[len - 1]['t'])) {
+						lyricS[i]['curColor'] = this.curLcolor
 						return i
 					} else {
-						lyricS[i]['chec'] = false
+						lyricS[i]['curColor'] = this.fontColor
 					}
 				}
 			}
         },
 		watch:{
-			singTime(val) {
+			singTime() {
 				let inde = this.getIndex();//当前歌词行数
 				this.toph = -35 * (inde + 1) + 'px';
 			}
@@ -108,8 +109,6 @@
 			font_s(12px)
 			lh(20px)
 			transition : all .3s linear
-			.chec
-				color: blue
 			li
 				h(20px)
 				pb(15px)

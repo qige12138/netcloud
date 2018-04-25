@@ -8,7 +8,8 @@ const state = {
 	playOrPause:false,//歌曲播放状态
 	showLyric:false,//是否显示歌词
 	singTime:0,//歌曲播放时间
-	fontColor:null//背景反色
+	fontColor:null,//背景反色
+	curLcolor:null//当前歌词颜色
 }
 const mutations = {
 	/**
@@ -45,6 +46,13 @@ const mutations = {
 	*/
 	fontColo(state,arr) {
 		state.fontColor = 'rgb(' + arr[0] + ',' + arr[1] + ',' + arr[2] + ')'
+	},
+	/**
+	* 当前歌词颜色
+	* @param arr arr
+	*/
+	curLcolo(state,arr) {
+		state.curLcolor = 'rgb(' + parseInt(arr[0]  / 2) + ',' + parseInt(arr[1] / 2) + ',' + parseInt(arr[2] / 2) + ')'
 	}
 }
 const actions = {
@@ -62,6 +70,9 @@ const actions = {
 	},
 	changeFontC({commit},{arr}) {
 		commit('fontColo',arr)
+	},
+	changecurC({commit},{arr}) {
+		commit('curLcolo',arr)
 	}
 
 }

@@ -1,5 +1,5 @@
 <template>
-	<div class="list">
+	<div class="list" ref="list">
 		<header-text></header-text>	
 		<list-msg :headData="data"></list-msg>
 		<list-song :songlist="data.tracks"></list-song>
@@ -26,6 +26,7 @@
 		},
 		created(){
 			this.$nextTick(() => {
+				document.documentElement.scrollTop = 0;
 				Bus.$emit('headerMsg');
 			});
 		},
