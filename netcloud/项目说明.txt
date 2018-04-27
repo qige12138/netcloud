@@ -1,1 +1,4 @@
+此项目必须配合网易云音乐官方API一起用
+
+api地址：
 https://binaryify.github.io/NeteaseCloudMusicApi/#/?id=%e5%ae%89%e8%a3%85

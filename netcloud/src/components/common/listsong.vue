@@ -11,7 +11,7 @@
 			</div>
 		</div>
 		<div class="listContent">
-			<div class="list" v-for="(song,index) in songlist">
+			<div class="list" v-for="(song,index) in songlist" :key="song.id">
 				<div class="ser">
 					{{index + 1}}
 				</div>

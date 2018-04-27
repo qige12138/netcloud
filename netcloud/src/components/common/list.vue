@@ -1,6 +1,6 @@
 <template>
 	<div class="list" ref="list">
-		<header-text></header-text>	
+		<header-text headt="歌单"></header-text>	
 		<list-msg :headData="data"></list-msg>
 		<list-song :songlist="data.tracks"></list-song>
 	</div>

@@ -5,7 +5,7 @@
 				<i class="icon iconfont">&#xe617;</i>
 			</div>
 			<div>
-				<p>歌单</p>
+				<p>{{headt}}</p>
 			</div>
 			<div class="t_r">
 				<i class="icon iconfont">&#xe621;</i>
@@ -18,6 +18,7 @@
 </template>
 <script>
 	export default {
+		props:['headt'],
 		methods:{
 			back() {
 				this.$router.go(-1);

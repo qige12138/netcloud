@@ -9,7 +9,8 @@ const state = {
 	showLyric:false,//是否显示歌词
 	singTime:0,//歌曲播放时间
 	fontColor:null,//背景反色
-	curLcolor:null//当前歌词颜色
+	curLcolor:null,//当前歌词颜色
+	cStatus:false//是否显示评论
 }
 const mutations = {
 	/**
@@ -53,6 +54,13 @@ const mutations = {
 	*/
 	curLcolo(state,arr) {
 		state.curLcolor = 'rgb(' + parseInt(arr[0]  / 2) + ',' + parseInt(arr[1] / 2) + ',' + parseInt(arr[2] / 2) + ')'
+	},
+	/**
+	* 评论状态
+	* @param s Boolean
+	*/
+	commenStatus(state,s) {
+		state.cStatus = s
 	}
 }
 const actions = {
@@ -73,6 +81,9 @@ const actions = {
 	},
 	changecurC({commit},{arr}) {
 		commit('curLcolo',arr)
+	},
+	changecStatus({commit},{s}) {
+		commit('commenStatus',s)
 	}
 
 }

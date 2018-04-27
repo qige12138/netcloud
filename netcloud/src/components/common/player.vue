@@ -131,7 +131,7 @@
 					allTime = self_.sing.allTimen;
 				self_.progress = t / allTime * 100 + '%';
 			},
-			//获取鼠标位置 s num 判断是否改变歌曲播放时间
+			//获取鼠标位置 s Number 是否改变歌曲播放时间
 			getPos(s) {
 				let proBar = this.$refs.proBar,
 					x = window.event.changedTouches[0].clientX - proBar.offsetLeft,

@@ -2,6 +2,7 @@
 	<div class="sing" ref="sing">
 		<sing-head :singHeader="singHeadr"></sing-head>
 		<sing-img :singImgOb="singObj"  @changeBg="bgColor" v-show="!showLyric"></sing-img>
+		<comment v-show="cStatus"></comment>
 		<lyric :lyricOb="singObj"  v-show="showLyric"></lyric>
 		<player :singid="singObj.id"></player>	
 	</div>
@@ -10,6 +11,7 @@
 	import Bus from '@/common/js/bus.js'
 	import singHead from './singhead'
 	import singImg from './singimg'
+	import comment from "./comment"
 	import Lyric from './lyric'
 	import player from './player'
 	import {mapState,mapActions} from "vuex"
@@ -17,6 +19,7 @@
 		components:{
 			singHead,
 			singImg,
+			comment,
 			Lyric,
 			player
 		},
@@ -29,13 +32,20 @@
 					id:this.$route.query.id,
 					img:JSON.parse(this.$route.query.singMsg).singImg
 				},
-				singHeadr:JSON.parse(this.$route.query.singMsg)
+				singHeadr:JSON.parse(this.$route.query.singMsg),
+				commentObj:{
+					contentH:0,//组件高度
+					id:this.$route.query.id,
+					img:JSON.parse(this.$route.query.singMsg).singImg,
+					
+				}
 				
 			}
 		},
 		computed:{
 			...mapState({
-				showLyric:state=> state.showLyric
+				showLyric:state=> state.showLyric,
+				cStatus:state=> state.cStatus
 			})
 		},
 		mounted() {
@@ -57,9 +67,6 @@
 				this.changecurC({arr:colorArr});
 				this.$refs.sing.style.backgroundImage = "linear-gradient(200deg, " + bgColor['s'] + "," + bgColor['e'] + ")";
 			}
-			
-			
-
 		}
 		
 	}

@@ -115,6 +115,13 @@ export const net = {
         h = h == 0 ? m : h + ":" + m;
         return h + ':' + s
 
+    },
+    /**
+    * 大于999的数字显示999+
+    * @params num Number
+    */
+    dealNum(num) {
+        return num > 999 ? '999+' : num 
     }
 
 

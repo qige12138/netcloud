@@ -9,19 +9,19 @@
 			</div>
 		</div>
 		<div class="singMsg" :style="{color:fontColor}">
-			<div>
+			<!-- <div>
 				<i class="icon iconfont">&#xe62b;</i>
 			</div>
 			<div>
 				<i class="icon iconfont">&#xe64c;</i>
-			</div>
-			<div>
+			</div> -->
+			<div @click="goComment">
 				<i class="icon iconfont">&#xe633;</i>
-				<span>999+</span>
+				<span v-html="net.dealNum(commentNum)"></span>
 			</div>
-			<div>
+			<!-- <div>
 				<i class="icon iconfont">&#xe60e;</i>
-			</div>
+			</div> -->
 		</div>
 		
 	</div>
@@ -32,6 +32,11 @@
 	import {mapState,mapActions} from "vuex"
 	
 	export default {
+		data() {
+			return {
+				commentNum:0
+			}
+		},
 		props:['singImgOb'],
 		computed:{
 			...mapState({
@@ -45,10 +50,12 @@
 				self.getImgColor();
 				self.$refs.singImgC.style.height = this.singImgOb.contentH + 'px';
 			});
+			this.getComment();
 		},
 		methods: {
 			...mapActions({
 				'lyStatus':'lyStatus'
+
 			}),
 			//获取图片的主色和次色 dominant主色  secondary次色
 			getImgColor() {
@@ -67,6 +74,25 @@
 			//显示歌词组件
 			showLyric() {
 				this.lyStatus({s:true})
+			},
+			//获取歌曲评论
+			getComment() {
+				let self_ = this;
+				self_.ajax.get('/comment/music',{
+					id:self_.singImgOb.id
+				})
+				.then(res=> {
+					self_.commentNum = res.total || 0;
+				});
+			},
+			goComment() {
+				this.$router.push({
+					path:"/comment",
+					query:{
+						id:this.singImgOb.id,
+						commentNum:this.commentNum
+					}
+				})
 			}
 		}
 	}
@@ -88,12 +114,14 @@
 				&.pause
 					transform:rotate(-30deg)
 			.pan
-				width:75%
-				height:0
-				pb(75%)
 				ab()
 				left:12.5%
 				top:45%
+				pb(75%)
+				width:75%
+				height:0
+				bor_r(50%)
+				overflow_h()				
 				z-index:3
 				text-align:center
 				bs()
@@ -121,9 +149,9 @@
 		.singMsg
 			ab()
 			bs()
-			width:100%
 			top:74%
 			pad_(0,10%)
+			width:100%
 			display:flex
 			div
 				flex:1
@@ -132,12 +160,12 @@
 				lh(30px)
 				i
 					font_s(22px)
-				&:nth-child(3)
+				&:nth-child(1)
 					re()
 					span
 						ab()
 						font_s(10px)
-						left:56%
+						left:51%
 						top:-5px
 			
 			
