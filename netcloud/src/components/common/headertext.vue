@@ -51,10 +51,11 @@
 				p:nth-child(1)
 					lh(48px)
 			&>div:nth-child(3)
+				flex:2
 				bs()
 				pr(10px)
 				lh(48px)
-				flex:2
+				
 				i
 					font_s(24px)
 					extend_click()
