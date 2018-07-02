@@ -13,6 +13,7 @@ import store from './common/js'
 import {net} from './common/js/public'
 import VueBus from 'vue-bus'
 import ajax from './common/js/axios'
+import format from './common/js/format'
 
 
 Vue.use(VueSwiper)

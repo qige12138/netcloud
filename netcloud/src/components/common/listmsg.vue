@@ -1,7 +1,7 @@
 <template>
 	<div class="listmsg">
-		<div class="msgHeader">
-			<div class="imgMsg">
+		<div class="msg_header">
+			<div class="img_msg">
 				<img :src="headData.coverImgUrl" onerror="this.src='/static/img/timg.60690e1.jpg'">
 				<i class="icon iconfont">&#xe613;</i>
 				<div>
@@ -56,10 +56,10 @@
 		bs()
 		bg_color(rgb(71,74,60))
 		color:$color_ff
-		.msgHeader 
+		.msg_header 
 			display:flex
 			pad(10px 25px)
-			.imgMsg
+			.img_msg
 				flex:12
 				re()
 				img

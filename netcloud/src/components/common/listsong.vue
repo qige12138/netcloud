@@ -1,6 +1,6 @@
 <template>
 	<div class="listsong">
-		<div class="listTitle bd_bottom">
+		<div class="list_title bd_bottom">
 			<div>
 				<i class="icon iconfont">&#xe627;</i>
 				<span>播放全部<span class="num">(共{{songlist.length}}首)</span></span>
@@ -60,7 +60,7 @@
 
 <style lang="stylus" scoped>
 	@import '../../common/stylus/public.styl'
-	.listTitle
+	.list_title
 		display:flex
 		height:48px
 		lh(48px)

@@ -5,13 +5,13 @@
 			  @click="view(0)">{{userName}}的歌单</span><i
 			class="icon iconfont set t_r" ref="set">&#xe600;</i>
 		</div>
-		<div class="creatSing" v-show="down_0">
+		<div class="creat_sing" v-show="down_0">
 			<div  v-if="songList.length">
 				<div v-for="song in songList" :key="song['id']">
-					<div class="singImg" :songId="song['id']" @click="golist(song.id)">
+					<div class="sing_img" :songId="song['id']" @click="golist(song.id)">
 						<img :src="song['coverImgUrl']">
 					</div><div
-					  :songId="song['id']"  class="singName bd_bottom" @click="golist(song.id)">
+					  :songId="song['id']"  class="sing_name bd_bottom" @click="golist(song.id)">
 						<p>{{song['name']}}</p>
 						<p>{{song['trackCount']}}&nbsp;by&nbsp;<span>{{song['creator']['nickname']}}</span></p>
 					</div><i
@@ -107,16 +107,16 @@
 				dis_inb()
 				bs()
 				pr(5px)
-		.creatSing 
+		.creat_sing 
 			bs()
 			padding:4px 0 4px 4px
-			.singImg 
+			.sing_img 
 				dis_inb()
 				pr(4px)
 				width:50px
 				height:50px
 				vertical-align: middle
-			.singName 
+			.sing_name 
 				bs()
 				pl(5px)
 				dis_inb()

@@ -13,7 +13,7 @@
 				<input type="password" v-model="password"  placeholder="请输入密码">
 			</div>
 		</div>
-		<div class="loginBtn t_c" :class="{'po_no':po}">
+		<div class="login_btn t_c" :class="{'po_no':po}">
 			<button @click="loginBtn()">{{btnT}}</button>
 		</div>
 		
@@ -119,7 +119,7 @@
 				&.p
 					i
 						font-size:18px
-		.loginBtn 	
+		.login_btn 	
 			pt(20px)	
 			button
 				btn()

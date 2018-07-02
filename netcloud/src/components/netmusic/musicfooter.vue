@@ -1,5 +1,5 @@
 <template>
-	<div class="musicFooter bd_top t_c"> 
+	<div class="music_footer bd_top t_c"> 
        <button>调整栏目顺序</button>
        <p>看视频，发现更有趣内容<i class="icon iconfont" >&#xe637;</i></p>
 	</div>
@@ -11,7 +11,7 @@
 </script>
 <style lang="stylus" scoped>
     @import '../../common/stylus/public.styl'
-    .musicFooter
+    .music_footer
         pad_(40px,0) 
         font_s(10px) 
         button

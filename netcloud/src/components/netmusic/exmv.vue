@@ -1,6 +1,6 @@
 <template>
 	<div class="exmv"> 
-        <div class="listWrap">
+        <div class="list_wrap">
             <div class="two">
                 <div class="wrap f_l">
                     <img src="../../common/img/songex.jpg">
@@ -42,7 +42,7 @@
 <style lang="stylus" scoped>
     @import '../../common/stylus/public.styl'   
     .exmv
-        .listWrap
+        .list_wrap
             font_s(12px)
             .wrap
                 w(50%)

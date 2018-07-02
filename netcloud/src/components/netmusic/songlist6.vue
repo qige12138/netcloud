@@ -1,6 +1,6 @@
 <template>
 	<div class="songlist"> 
-        <div class="listWrap">
+        <div class="list_wrap">
             <div class="wrap f_l">
                 <div class="wrapImg">
                     <img src="../../common/img/songexb.jpg">
@@ -58,7 +58,7 @@
 <style lang="stylus" scoped>
     @import '../../common/stylus/public.styl'
     .songlist
-        .listWrap
+        .list_wrap
             .wrap
                 width:33%
                 font_s(12px)

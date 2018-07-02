@@ -1,9 +1,9 @@
 <template>
 	<div class="volume">
-		<div class="volumeConent">
-			<router-link tag="div" to="" class="volumeTab">
+		<div class="volume_conent">
+			<router-link tag="div" to="" class="volume_tab">
 				<i class="icon iconfont tabI t_c" >&#xe65e;</i><span
-				class="tabName bd_bottom">我的电台<span class="num">({{count}})</span></span>
+				class="tab_name bd_bottom">我的电台<span class="num">({{count}})</span></span>
 			</router-link>
 		</div>
 		<collect-sing></collect-sing>
@@ -48,7 +48,7 @@
 	.volume 
 		font-size:$fonts_14
 		color:$color_th
-		.volumeTab 
+		.volume_tab 
 			height:48px
 			line-height:48px
 			.tabI 
@@ -59,7 +59,7 @@
 				font-size:$fonts_22
 				position:relative
 				top:2px
-			.tabName 
+			.tab_name 
 				dis_inb()
 				width:calc(100% - 50px)
 				.num 

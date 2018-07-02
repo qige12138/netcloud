@@ -1,6 +1,6 @@
 <template>
 	<div class="songEx"> 
-        <div class="listWrap">
+        <div class="list_wrap">
             <div class="two">
                 <div class="wrap">
                     <div class="wrapImg">

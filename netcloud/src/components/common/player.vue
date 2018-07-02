@@ -1,5 +1,5 @@
 <template>
-	<div class="playerWrap" :style="{color:fontColor}">
+	<div class="player_wrap" :style="{color:fontColor}">
 		<div class="player" ref="player">
 			<div class="progress">
 				<div class="st">{{sing.curTimes}}</div>
@@ -53,7 +53,6 @@
 			})
 		},
 		mounted() {
-
 			let self_ = this;
 			self_.playIcon = self_.play;
 			self_.sing.singEle = self_.$refs.sion;
@@ -155,7 +154,7 @@
 </script>
 <style scoped lang='stylus'>
 	@import '../../common/stylus/public.styl'
-	.playerWrap
+	.player_wrap
 		fi()
 		height:90px
 		width:100%

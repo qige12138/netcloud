@@ -1,5 +1,5 @@
 <template>
-	<div class="singImg" ref="singImgC">
+	<div class="sing_img" ref="singImgC">
 		<div class="singer bd_top" @click="showLyric">
 			<img src="../../common/img/bang.png" class="bang" :class="{'pause':!playOrPause}">
 			<div class="pan" :class="{'pause':!playOrPause}">
@@ -8,20 +8,11 @@
 				</div>
 			</div>
 		</div>
-		<div class="singMsg" :style="{color:fontColor}">
-			<!-- <div>
-				<i class="icon iconfont">&#xe62b;</i>
-			</div>
-			<div>
-				<i class="icon iconfont">&#xe64c;</i>
-			</div> -->
+		<div class="sing_msg" :style="{color:fontColor}">
 			<div @click="goComment">
 				<i class="icon iconfont">&#xe633;</i>
 				<span v-html="net.dealNum(commentNum)"></span>
 			</div>
-			<!-- <div>
-				<i class="icon iconfont">&#xe60e;</i>
-			</div> -->
 		</div>
 		
 	</div>
@@ -100,7 +91,7 @@
 
 <style lang="stylus" scoped>
 	@import '../../common/stylus/public.styl'
-	.singImg
+	.sing_img
 		overflow_h()
 		.singer
 			re()
@@ -146,7 +137,7 @@
 						width:100%
 						height:100%
 						border-radius:50%
-		.singMsg
+		.sing_msg
 			ab()
 			bs()
 			top:74%
