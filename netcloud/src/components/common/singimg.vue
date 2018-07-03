@@ -80,8 +80,7 @@
 				this.$router.push({
 					path:"/comment",
 					query:{
-						id:this.singImgOb.id,
-						commentNum:this.commentNum
+						id:this.singImgOb.id
 					}
 				})
 			}

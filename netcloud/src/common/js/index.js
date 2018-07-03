@@ -10,7 +10,8 @@ const state = {
 	singTime:0,//歌曲播放时间
 	fontColor:null,//背景反色
 	curLcolor:null,//当前歌词颜色
-	cStatus:false//是否显示评论
+	cStatus:false,//是否显示评论
+	commentNum:0//评论数
 }
 const mutations = {
 	/**
@@ -61,6 +62,13 @@ const mutations = {
 	*/
 	commenStatus(state,s) {
 		state.cStatus = s
+	},
+	/**
+	* 评论数
+	* @param n Number
+	*/
+	commentNums(state,n) {
+		state.commentNum = n
 	}
 }
 const actions = {
@@ -84,6 +92,9 @@ const actions = {
 	},
 	changecStatus({commit},{s}) {
 		commit('commenStatus',s)
+	},
+	changeComNum({commit},{n}) {
+		commit('commentNums',n)
 	}
 
 }

@@ -15,10 +15,10 @@
 				<div class="ser">
 					{{index + 1}}
 				</div>
-				<div class="bd_bottom singMsg" @click="play(song.id,song['name'],song['artists'][0]['name'],song['album']['blurPicUrl'])">
+				<div class="bd_bottom singMsg" @click="play(song.id,song['name'],song['ar'][0]['name'],song['al']['picUrl'])">
 					<div>
 						<p>{{song['name']}}</p>
-						<p>{{song['artists'][0]['name']}}-{{song['album']['name']}}</p>
+						<p>{{song['ar'][0]['name']}}-{{song['al']['name']}}</p>
 					</div>
 					<div>
 						<i class="icon iconfont">&#xe60e;</i>

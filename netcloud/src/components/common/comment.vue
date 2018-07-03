@@ -1,7 +1,7 @@
 <template>
     <div>
-        <comment-head :headNum=headObj.commentNum></comment-head>
-        <comment-list :singObj=headObj></comment-list>
+        <comment-head></comment-head>
+        <comment-list :singId=id></comment-list>
     </div>
     
 </template>
@@ -16,7 +16,7 @@
         },
         data() {
             return {
-                headObj:this.$route.query
+                id:this.$route.query.id
             }
         }
     }

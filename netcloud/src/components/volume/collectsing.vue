@@ -63,7 +63,7 @@
 					this.$router.push({
 						path:'/list',
 						query:{
-							ret:JSON.stringify(res.result)
+							ret:JSON.stringify(res.playlist)
 						}
 					})
 				})
@@ -116,6 +116,9 @@
 				width:50px
 				height:50px
 				vertical-align: middle
+				img 
+					w(100%)
+					h(100%)
 			.sing_name 
 				bs()
 				pl(5px)
