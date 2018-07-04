@@ -1,15 +1,9 @@
 <template>
 	<div class="slide">
 		<swiper :options="swiperOption"  ref="mySwiper">  
-            <swiper-slide > 
-                <img src="../../common/img/timg.jpg">
-            </swiper-slide> 
-             <swiper-slide > 
-                <img src="../../common/img/timp1.jpg">
-            </swiper-slide> 
-             <swiper-slide > 
-                <img src="../../common/img/logo.png">
-            </swiper-slide>  
+            <swiper-slide v-for="(banner,index) in banners" :key="index">
+                <img :src="banner"> 
+            </swiper-slide>             
             <div class="swiper-pagination" slot="pagination"></div>  
         </swiper>  
 	</div>
@@ -25,7 +19,7 @@
         },  
         data() {  
             return {
-                swiperOption: {  
+                swiperOption:{  
                     pagination: '.swiper-pagination', 
                     autoplay:'3000', 
                     slidesPerView: 'auto',  
@@ -36,20 +30,20 @@
                     onSlideChangeEnd: swiper => {  
                         this.page = swiper.realIndex+1;  
                         this.index = swiper.realIndex;  
-                    },  
-                }
+                    }
+                },
+                banners:['/static/img/rec3.79fb520.jpg','/static/img/rec3.79fb520.jpg','/static/img/rec3.79fb520.jpg']
             }  
         },  
+         
+        beforeMount () {           
+        },
         //定义这个sweiper对象  
-        computed: {  
-  
+        computed: {    
             swiper() {  
-              return this.$refs.mySwiper.swiper;  
+                return this.$refs.mySwiper.swiper;  
             }  
-        },  
-        mounted () {  
-            // this.swiper.slideTo(0, 0, false);  
-        }  
+        }
 	}
 
 </script>

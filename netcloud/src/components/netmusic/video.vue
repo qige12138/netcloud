@@ -11,7 +11,5 @@
 
 <style lang="stylus" scoped>
 	@import '../../common/stylus/public.styl'
-	.video 
-		pt(36px)
 
 </style>
