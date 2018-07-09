@@ -4,8 +4,6 @@
 		<tab></tab>
 		<song-type listype="推荐歌单"></song-type>
 		<song-list6 songtype="recommend"></song-list6>
-		<song-type listype="独家放送"></song-type>
-		<song-ex songtype="exclusive"></song-ex>
 		<song-type listype="最新音乐"></song-type>
 		<song-list6 songtype="new"></song-list6>
 		<song-type listype="推荐MV"></song-type>

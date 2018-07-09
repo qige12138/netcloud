@@ -13,7 +13,7 @@
 					</div><div
 					  :songId="song['id']"  class="sing_name bd_bottom" @click="golist(song.id)">
 						<p>{{song['name']}}</p>
-						<p>{{song['trackCount']}}&nbsp;by&nbsp;<span>{{song['creator']['nickname']}}</span></p>
+						<p>{{song['trackCount']}}首&nbsp;by&nbsp;<span>{{song['creator']['nickname']}}</span></p>
 					</div><i
 					 class="icon iconfont t_c bd_bottom">&#xe60e;</i>
 				</div>
