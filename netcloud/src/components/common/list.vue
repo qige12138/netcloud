@@ -1,8 +1,8 @@
 <template>
 	<div class="list" ref="list">
 		<header-text headt="歌单"></header-text>	
-		<list-msg :headData="data"></list-msg>
-		<list-song :songlist="data.tracks"></list-song>
+		<list-msg :headData="data" v-if="data"></list-msg>
+		<list-song :songlist="data.tracks" v-if="data"></list-song>
 	</div>
 </template>
 <script>
@@ -18,11 +18,13 @@
 		},
 		data(){
 			return {
-				data:JSON.parse(this.$route.query.ret),
+				id:this.$route.query.id,
+				data:null,
 				headData:{}
 			}
 		},
 		mounted() {
+			this.getDetail();
 		},
 		created(){
 			this.$nextTick(() => {
@@ -31,6 +33,17 @@
 			});
 		},
 		methods:{
+			getDetail() {
+				this.ajax.get('/playlist/detail',{
+					id:this.id,
+					load:' '
+				})
+				.then((res)=> {
+					this.net.closeAll();
+					this.data = res.playlist;
+				})
+			}
+			
 		}
 	}
 </script>

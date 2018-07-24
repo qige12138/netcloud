@@ -116,11 +116,13 @@ export const net = {
         return uid
     },
     /**
-    * 数字超过一万用万表示
+    * 数字超过一亿用亿表示,超过一万用万表示
     * @param num number
     */
     formatNum(num) {
-        return num > 10000 ? ((num / 10000).toFixed(1) + '万') : num
+        num = num > 100000000 ? ((num / 100000000).toFixed(1) + '亿') : num;
+        num = num > 10000 ? ((num / 10000).toFixed(1) + '万') : num;
+        return num
     },
     /**
     * 将Number 的时间转化为 "00:00:00"格式的字符串

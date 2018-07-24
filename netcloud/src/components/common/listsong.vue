@@ -41,12 +41,7 @@
 			//播放歌曲 id 歌曲ID singname歌曲名字 singername歌手名字 singimg歌曲封面
 			play(id,singname,singername,singimg) {
 				let obj = {
-					id:id,
-					singMsg:JSON.stringify({
-						singName:singname,
-						singerName:singername,
-						singImg:singimg
-					})
+					id:id
 				}
 				this.lyStatus({s:false})
 				this.$router.push({

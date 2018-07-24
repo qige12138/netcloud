@@ -1,7 +1,7 @@
 <template>
 	<div class="songlist"> 
         <div class="list_wrap">
-            <div class="wrap f_l" v-for="menu in dataArr" :key="menu.id">
+            <div class="wrap f_l" v-for="menu in dataArr" :key="menu.id" @click="goList(menu.id)">
                 <div class="wrapImg">
                     <p class="count">
                         <i class="icon iconfont">&#xe681;</i>
@@ -20,21 +20,31 @@
 	</div>
 </template>
 <script>
+    import {mapActions} from 'vuex'
 	export default{
         data() {
             return {
                 dataArr:null,
                 urlObj:{
-                    recommend:"/personalized",
-                    new:"/personalized/newsong"
+                    recommend:{
+                        aurl:"/personalized",//接口地址
+                        purl:"/list"//页面地址
+                    },
+                    new:{
+                        aurl:"/personalized/newsong",
+                        purl:"/sing"
+                    }
                 }
             }
         },
         props:['songtype'],
         mounted() {
-            this.urlObj[this.songtype] && this.getRecome(this.urlObj[this.songtype]);
+            this.urlObj[this.songtype] && this.getRecome(this.urlObj[this.songtype]['aurl']);
         },
         methods:{
+            ...mapActions({
+				'lyStatus':'lyStatus'
+			}),
             getRecome(url) {
                 this.ajax.get(url,{
                     limit:6
@@ -57,9 +67,21 @@
                     obj.name = val.name;
                     obj.artist = val.song.artists[0].name;
                     obj.playCount = val.song.bMusic.playTime;
+                    obj.id = val.id;
                     arr.push(obj)
                 }
                 this.dataArr = arr;
+            },
+            goList(id) {
+                'new' == this.songtype && this.lyStatus({s:false});
+                let url = this.urlObj[this.songtype]['purl']
+                this.$router.push({
+                    path:url,
+                    query:{
+                        id:id
+                    }
+                })
+                	
             }
         }
 	}

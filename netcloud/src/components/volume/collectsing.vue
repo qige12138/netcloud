@@ -54,19 +54,12 @@
 			* @params id 歌单id
 			*/
 			golist(id) {
-				this.ajax.get('/playlist/detail',{
-					id:id,
-					load:' '
-				})
-				.then(res=> {
-					this.net.closeAll();
-					this.$router.push({
-						path:'/list',
-						query:{
-							ret:JSON.stringify(res.playlist)
-						}
-					})
-				})
+				this.$router.push({
+					path:'/list',
+					query:{
+						id:id
+					}
+				})				
 				
 			},
 			getSubcount() {

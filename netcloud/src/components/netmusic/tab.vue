@@ -37,6 +37,17 @@
         },
         created() {
             this.date = new Date().getDate();
+            this.getRecommd();
+        },
+        methods:{
+            getRecommd() {
+                this.ajax.get('/recommend/songs',{
+                })
+                .then((res)=> {
+                    console.info(res)
+                });
+
+            }
         }
 	}
 

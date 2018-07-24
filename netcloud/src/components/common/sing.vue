@@ -1,10 +1,10 @@
 <template>
 	<div class="sing" ref="sing">
-		<sing-head :singHeader="singHeadr"></sing-head>
-		<sing-img :singImgOb="singObj"  @changeBg="bgColor" v-show="!showLyric"></sing-img>
-		<comment v-show="cStatus"></comment>
-		<lyric :lyricOb="singObj"  v-show="showLyric"></lyric>
-		<player :singid="singObj.id"></player>	
+		<sing-head :singHeader="singHeadr" v-if="singMsg"></sing-head>
+		<sing-img :singImgOb="singObj"  @changeBg="bgColor" v-show="!showLyric" v-if="singMsg"></sing-img>
+		<comment v-show="cStatus" v-if="singMsg"></comment>
+		<lyric :lyricOb="singObj"  v-show="showLyric" v-if="singMsg"></lyric>
+		<player :singid="singObj.id" v-if="singMsg"></player>	
 	</div>
 </template>
 <script>
@@ -25,21 +25,13 @@
 		},
 		data() {
 			return {
-				winHeight:document.body.clientHeight,
+				winHeight:'',
 				colorArr:[],//图片颜色反色数组 r g b
-				singObj:{//图片数据
-					contentH:0,//组件高度
-					id:this.$route.query.id,
-					img:JSON.parse(this.$route.query.singMsg).singImg
-				},
-				singHeadr:JSON.parse(this.$route.query.singMsg),
-				commentObj:{
-					contentH:0,//组件高度
-					id:this.$route.query.id,
-					img:JSON.parse(this.$route.query.singMsg).singImg,
-					
-				}
-				
+				singObj:'',
+				singHeadr:'',
+				commentObj:'',
+				id:this.$route.query.id,
+				singMsg:''				
 			}
 		},
 		computed:{
@@ -49,7 +41,9 @@
 			})
 		},
 		mounted() {
-			this.singObj.contentH = this.winHeight - 144;
+			this.winHeight = document.body.clientHeight - 144;
+			this.getSingMsg();
+			
 		},
 		methods: {
 			...mapActions({
@@ -66,6 +60,29 @@
 				this.changeFontC({arr:colorArr});
 				this.changecurC({arr:colorArr});
 				this.$refs.sing.style.backgroundImage = "linear-gradient(200deg, " + bgColor['s'] + "," + bgColor['e'] + ")";
+			},
+			getSingMsg() {				
+				this.ajax.get('/song/detail',{
+					ids:this.$route.query.id
+				})
+				.then((res)=> {
+					this.singMsg = res.songs[0];
+					this.singHeadr = {
+						singName:this.singMsg.name,
+						singerName:this.singMsg.ar[0].name
+					}
+					this.singObj = {//图片数据
+						contentH:this.winHeight,//组件高度
+						id:this.id,
+						img:this.singMsg.al.picUrl
+					};
+					this.commentObj = {
+						contentH:this.winHeight,//组件高度
+						id:this.id,
+						mg:this.singMsg.al.picUrl
+						
+					}
+				})
 			}
 		}
 		
