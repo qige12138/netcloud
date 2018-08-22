@@ -110,11 +110,11 @@
 			getUrl() {
 				let self_ = this;
 				self_.ajax.get('/music/url',{
-					id:this.singid
+					id:self_.singid
 				})
 				.then(res=> {
 					if(!res.data[0].url) {
-						this.plOrPa({s:false});
+						self_.plOrPa({s:false});
 						return
 					}
 					self_.sing.url = res.data[0].url;

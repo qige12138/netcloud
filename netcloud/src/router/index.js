@@ -10,6 +10,8 @@ import Station from '@/components/netmusic/station'
 import List from '@/components/common/list'
 import Sing from '@/components/common/sing'
 import Comment from '@/components/common/comment'
+import Dailyrecom from '@/components/netmusic/dailyrecom'
+
 
 Vue.use(Router)
 
@@ -60,6 +62,10 @@ export default new Router({
     {
       path:'/comment',
       component:Comment
+    },
+    {
+      path:'/dailyrecom',
+      component:Dailyrecom
     }
     
 

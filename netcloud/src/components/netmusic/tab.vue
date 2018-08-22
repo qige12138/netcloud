@@ -6,7 +6,7 @@
             </div>
             <p>私人FM</p>
         </div>
-        <div class="t_c tab_nav">
+        <div class="t_c tab_nav" @click="goDaily">
             <div class="ic date">
                 <i class="icon iconfont tabI t_c" >&#xe636;</i>
                 <span style="font-size: 8px">{{date}}</span>
@@ -37,17 +37,15 @@
         },
         created() {
             this.date = new Date().getDate();
-            this.getRecommd();
         },
         methods:{
-            getRecommd() {
-                this.ajax.get('/recommend/songs',{
-                })
-                .then((res)=> {
-                    console.info(res)
-                });
+            goDaily() {
+                this.$router.push({
+					path:'/dailyrecom'
+				});
 
             }
+
         }
 	}
 
